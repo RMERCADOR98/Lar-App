@@ -7,6 +7,9 @@ class Utentes extends Component {
     utentes: [
       { nome: "João Matos", idade: "81", eCivil: "viuvo", id: 1 },
       { nome: "Ti Maria", idade: "78", eCivil: "viuva", id: 2 },
+      { nome: "João Matos", idade: "81", eCivil: "viuvo", id: 3 },
+      { nome: "Ti Maria", idade: "78", eCivil: "viuva", id: 4 },
+      { nome: "Ti Maria", idade: "78", eCivil: "viuva", id: 5 },
     ],
   };
 
