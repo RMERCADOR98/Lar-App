@@ -6,15 +6,15 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   gridPaper: {
+    margin: theme.spacing(1),
     padding: theme.spacing(2),
     textAlign: "center",
-    justifyContent: "center",
-    alignItems: "center",
     color: theme.palette.text.secondary,
   },
   large: {
-    width: theme.spacing(20),
-    height: theme.spacing(20),
+    margin: "0 auto",
+    width: theme.spacing(30),
+    height: theme.spacing(30),
   },
 }));
 
@@ -22,46 +22,36 @@ const PerfilUtente = ({ utentes, deleteUtente }) => {
   const classes = useStyles();
   const listaUtentes = utentes.map((utente) => {
     return (
-      <div className={classes.root} key={utente.id}>
-        <Grid item xs={3}>
-          <Paper className={classes.gridPaper}>
-            <Avatar
-              variant="circle"
-              className={classes.large}
-              src={process.env.PUBLIC_URL + "img/oldLady.jpg"}
-            />
-            {/* Tive de usar o require pois chamar apenas peça imagem nao resolvia o problema -> StackOverflow*/}
-            <p style={{ textAlign: "center" }}>
-              <b>{utente.nome}</b>
-              <br />
-              Idade: {utente.idade}
-              <br />
-              Estado civil: {utente.eCivil}
-              <br />
-            </p>
-            <button
-              onClick={() => {
-                deleteUtente(utente.id);
-              }}
-            >
-              Apagar Utente
-            </button>
-          </Paper>
-        </Grid>
-      </div>
+      <Grid item xs={12} sm={6} md={4} lg={2} xl={2} key={utente.id}>
+        <Paper className={classes.gridPaper} justify="center">
+          <Avatar
+            variant="circle"
+            className={classes.large}
+            src={process.env.PUBLIC_URL + "img/oldLady.jpg"}
+          />
+          <p>
+            <b>{utente.nome}</b>
+            <br />
+            Idade: {utente.idade}
+            <br />
+            Estado civil: {utente.eCivil}
+            <br />
+          </p>
+          <button
+            onClick={() => {
+              deleteUtente(utente.id);
+            }}
+          >
+            Apagar Utente
+          </button>
+        </Paper>
+      </Grid>
     );
   });
+
   return (
     <div className={classes.root}>
-      <Grid
-        container
-        flexWrap="wrap"
-        spacing={0}
-        justifyContent="center"
-        alignContent="center"
-        alignItems="center"
-        direction="row"
-      >
+      <Grid container fluid="true" justify="center">
         {listaUtentes}
       </Grid>
     </div>

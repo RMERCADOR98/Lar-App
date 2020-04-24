@@ -1,6 +1,6 @@
 import React from "react";
 
-import PerfilUtente from "../Components/card";
+import PerfilUtenteCard from "../Components/card";
 import FormDialog from "../Components/Forms/addUtente/addUtente";
 import FormDialogaddFamiliar from "../Components/Forms/addFamiliar/addFamiliar";
 import FormDialogaddAlimentacao from "../Components/Forms/addAlimentacao/addAlimentacao";
@@ -11,7 +11,7 @@ const Utente = () => {
   return (
     <div style={{ backgroundColor: "rgb(66, 133, 244)" }}>
       <CssBaseline />
-      <PerfilUtente />
+      <PerfilUtenteCard />
       <FormDialog />
       <FormDialogaddFamiliar />
       <FormDialogaddAlimentacao />

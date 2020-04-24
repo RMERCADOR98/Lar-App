@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function PerfilUtente() {
+export default function PerfilUtenteCard() {
   const classes = useStyles();
   return (
     <Container style={{ background: "rgb(66, 133, 244)" }}>
@@ -30,8 +30,7 @@ export default function PerfilUtente() {
           >
             <Grid item xs={6}>
               <Button variant="contained" size="medium">
-                {" "}
-                Informações{" "}
+                Informações
               </Button>
             </Grid>
             <Grid item xs={6}>
