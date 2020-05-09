@@ -1,7 +1,12 @@
 import React, { Component, Fragment } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import MaterialUIPickers from "./calendárioNascimento";
+
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 
 class NSE extends Component {
   continue = (e) => {
@@ -15,28 +20,38 @@ class NSE extends Component {
   };
 
   render() {
-    const { values, handleChange } = this.props;
+    const { values, handleChange, handleDateChange } = this.props;
 
     const styles = {
       button: {
         margin: 15,
       },
     };
+
     return (
       <Fragment>
         <br />
-        <MaterialUIPickers onChange={handleChange("nascimento")} />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <KeyboardDatePicker
+            type="text"
+            label="Data de Nascimento"
+            format="dd/MM/yyyy"
+            value={values.nascimento}
+            onChange={(date) => handleDateChange(date)}
+          />
+        </MuiPickersUtilsProvider>
+        <br />
         <TextField
           label="Sexo"
-          onChange={handleChange("bio")}
-          defaultValue={values.bio}
+          onChange={handleChange("sexo")}
+          defaultValue={values.sexo}
         />
         <br />
         <TextField
           label="Estado civil"
-          floatingLabelText="Bio"
-          onChange={handleChange("bio")}
-          defaultValue={values.bio}
+          floatingLabelText="estadoCivil"
+          onChange={handleChange("estadoCivil")}
+          defaultValue={values.estadoCivil}
         />
         <br />
         <br />

@@ -16,8 +16,28 @@ class Confirm extends Component {
 
   render() {
     const {
-      values: { nomeCompleto, alcunha, nascimento, ocupation, city, bio },
+      values: {
+        nomeCompleto,
+        alcunha,
+        nascimento,
+        sexo,
+        estadoCivil,
+        nacionalidade,
+        altura,
+        peso,
+        nCartaoCidade,
+        nContribuinte,
+        nSegurancaSocial,
+        grupoSanguineo,
+        doencas,
+        alergias,
+        centroSaude,
+        contactoCentroSaude,
+        medico,
+      },
     } = this.props;
+
+    console.log(nascimento);
 
     const styles = {
       button: {
@@ -30,10 +50,27 @@ class Confirm extends Component {
         <List>
           <ListItemText primary="Nome Completo" secondary={nomeCompleto} />
           <ListItemText primary="Alcunha" secondary={alcunha} />
-          <ListItemText primary="Data de Nascimento" secondary={nascimento} />
-          <ListItemText primary="ocupation" secondary={ocupation} />
-          <ListItemText primary="city" secondary={city} />
-          <ListItemText primary="bio" secondary={bio} />
+          <ListItemText primary="Data de Nascimento" />
+          <ListItemText primary="Sexo" secondary={sexo} />
+          <ListItemText primary="Estado civil" secondary={estadoCivil} />
+          <ListItemText primary="Nacionalidade" secondary={nacionalidade} />
+          <ListItemText primary="Altura" secondary={altura} />
+          <ListItemText primary="Peso" secondary={peso} />
+          <ListItemText primary="Nº Cartão Cidadão" secondary={nCartaoCidade} />
+          <ListItemText primary="Nº Contribuinte" secondary={nContribuinte} />
+          <ListItemText
+            primary="Nº Segurança Social"
+            secondary={nSegurancaSocial}
+          />
+          <ListItemText primary="Grupo Sanguíneo" secondary={grupoSanguineo} />
+          <ListItemText primary="Doenças" secondary={doencas} />
+          <ListItemText primary="Alergias" secondary={alergias} />
+          <ListItemText primary="Centro de Saúde" secondary={centroSaude} />
+          <ListItemText
+            primary="Contacto Centro Saude"
+            secondary={contactoCentroSaude}
+          />
+          <ListItemText primary="Médico" secondary={medico} />
         </List>
         <Button
           variant="contained"

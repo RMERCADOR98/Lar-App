@@ -16,7 +16,7 @@ export class UserForm extends Component {
     nomeCompleto: "",
     alcunha: "",
 
-    nascimento: "",
+    nascimento: new Date(),
     sexo: "",
     estadoCivil: "",
 
@@ -57,8 +57,15 @@ export class UserForm extends Component {
   //Handle field change
 
   handleChange = (input) => (e) => {
+    console.log(e.target);
     this.setState({
       [input]: e.target.value,
+    });
+  };
+
+  handleDateChange = (date) => {
+    this.setState({
+      nascimento: date,
     });
   };
 
@@ -130,6 +137,7 @@ export class UserForm extends Component {
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
+            handleDateChange={this.handleDateChange}
             values={values}
           />
         );

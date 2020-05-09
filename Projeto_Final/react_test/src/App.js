@@ -1,38 +1,70 @@
 import React, { Component } from "react";
 import ButtonAppBar from "./Components/Navbar";
-import Utente from "./Layout/Utente";
 import Familiares from "./Layout/Familiares";
 import Utentes from "./Layout/Utentes";
-import { BrowserRouter, Route, NavLink } from "react-router-dom";
-import { CssBaseline } from "@material-ui/core";
+import Alimentacao from "./Layout/Alimentacao";
+import Saude from "./Layout/Saude";
+import Info from "./Layout/Info";
+import PerfilUtente from "./Components/PerfilUtente";
+import BemEstar from "./Layout/BemEstar";
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Switch,
+} from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
       <div>
-        <CssBaseline />
-        <ButtonAppBar />
+        <Router>
+          <ButtonAppBar>
+            <NavLink to={"/"} exact activeStyle={{ color: "green" }}>
+              Utentes
+            </NavLink>
+            <br />
 
-        <BrowserRouter>
-          <NavLink to={"/Utentes"} exact activeStyle={{ color: "green" }}>
-            Utentes
-          </NavLink>
-          <br />
+            <NavLink to={"/Utente"} exact activeStyle={{ color: "green" }}>
+              Utente
+            </NavLink>
 
-          <NavLink to={"/Utente"} exact activeStyle={{ color: "green" }}>
-            Utente
-          </NavLink>
+            <br />
+            <NavLink to={"/Alimentação"} exact activeStyle={{ color: "green" }}>
+              Alimentação
+            </NavLink>
+            <br />
 
-          <br />
+            <NavLink to={"/Saúde"} exact activeStyle={{ color: "green" }}>
+              Saúde
+            </NavLink>
+            <br />
+            <NavLink to={"/Informações"} exact activeStyle={{ color: "green" }}>
+              Info
+            </NavLink>
+            <br />
+            <NavLink to={"/Bem-Estar"} exact activeStyle={{ color: "green" }}>
+              Bem Estar
+            </NavLink>
+            <br />
 
-          <NavLink to={"/Familiares"} exact activeStyle={{ color: "green" }}>
-            Familiares
-          </NavLink>
+            <NavLink to={"/Familiares"} exact activeStyle={{ color: "green" }}>
+              Familiares
+            </NavLink>
 
-          <Route exact path="/Utentes" component={Utentes} />
-          <Route exact path="/Utente" component={Utente} />
-          <Route exact path="/Familiares" component={Familiares} />
-        </BrowserRouter>
+            <br />
+
+            <Switch>
+              <Route exact path="/" component={Utentes} />
+              <Route exact path="/Utente/:id" component={PerfilUtente} />
+              <Route exact path="/Alimentação" component={Alimentacao} />
+              <Route exact path="/Saúde" component={Saude} />
+              <Route exact path="/Informações" component={Info} />
+              <Route exact path="/Bem-Estar" component={BemEstar} />
+              <Route exact path="/Familiares" component={Familiares} />
+            </Switch>
+          </ButtonAppBar>
+        </Router>
       </div>
     );
   }

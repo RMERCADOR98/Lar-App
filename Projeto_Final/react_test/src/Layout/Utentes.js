@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import PerfilUtente from "./PerfilUtente";
+import Utente from "./Utente";
 import AddUtente from "../Components/AddUtente";
+import FormDialog from "../Components/Forms/addUtente/addUtente";
 
 class Utentes extends Component {
   state = {
@@ -35,12 +36,10 @@ class Utentes extends Component {
       <div>
         <h1> Todos os utentes</h1>
 
-        <PerfilUtente
-          utentes={this.state.utentes}
-          deleteUtente={this.deleteUtente}
-        />
+        <Utente utentes={this.state.utentes} deleteUtente={this.deleteUtente} />
 
         <AddUtente addUtente={this.addUtente} />
+        <FormDialog />
       </div>
     );
   }

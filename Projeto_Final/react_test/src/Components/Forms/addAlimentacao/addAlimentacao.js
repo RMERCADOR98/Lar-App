@@ -8,20 +8,21 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Add from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import AlimentacaoForm from "./stepperform/AlimentacaoForm";
+import { makeStyles } from "@material-ui/core";
 
-export default function FormDialog() {
-  const styles = (theme) => ({
-    button: {
-      margin: theme.spacing.unit,
-    },
-    fab: {
-      position: "absolute",
-      bottom: theme.spacing(2),
-      right: theme.spacing(2),
-      margin: theme.spacing(1),
-    },
-  });
+const useStyles = makeStyles((theme) => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
+  fab: {
+    position: "fixed",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+    margin: theme.spacing(1),
+  },
+}));
 
+const FormDialogaddAlimentacao = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -32,13 +33,15 @@ export default function FormDialog() {
     setOpen(false);
   };
 
+  const classes = useStyles();
+
   return (
     <div>
       <Fab
         color="secondary"
         mini
         aria-label="add"
-        className={styles.fab}
+        className={classes.fab}
         onClick={handleClickOpen}
       >
         <Add />
@@ -69,4 +72,6 @@ export default function FormDialog() {
       </Dialog>
     </div>
   );
-}
+};
+
+export default FormDialogaddAlimentacao;

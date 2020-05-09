@@ -10,8 +10,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import PersonIcon from "@material-ui/icons/Person";
 import Divider from "@material-ui/core/Divider";
-import { MenuList, MenuItem } from "@material-ui/core";
-import { Link } from "react-router-dom";
+
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import clsx from "clsx";
@@ -20,6 +19,9 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
+
+import { Link, withRouter } from "react-router-dom";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -64,9 +66,9 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   },
+
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -86,9 +88,13 @@ const useStyles = makeStyles((theme) => ({
   extendedIcon: {
     marginRight: theme.spacing(1),
   },
+  link: {
+    textDecoration: "none",
+    color: theme.palette.text.primary,
+  },
 }));
 
-export default function ButtonAppBar() {
+const ButtonAppBar = ({ children }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -100,6 +106,26 @@ export default function ButtonAppBar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const drawer = (
+    <div>
+      <List>
+        <ListItem button component={Link} to="/">
+          <ListItemIcon>
+            <PersonIcon />
+          </ListItemIcon>
+          <ListItemText>Utentes</ListItemText>
+        </ListItem>
+
+        <ListItem button component={Link} to="/Familiares">
+          <ListItemIcon>
+            <PersonIcon />
+          </ListItemIcon>
+          <ListItemText>Familiares</ListItemText>
+        </ListItem>
+      </List>
+    </div>
+  );
 
   return (
     <div className={classes.root}>
@@ -147,30 +173,20 @@ export default function ButtonAppBar() {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          {["Utentes", "Familiares"].map((text) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
+        {drawer}
       </Drawer>
+
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-        <div>
-          <h1>qualquer coisita serve</h1>
-        </div>
-
         <div className={classes.drawerHeader} />
+        <div style={{ padding: 0 }}>{children}</div>
       </main>
       {/* /Drawer */}
     </div>
   );
-}
+};
+
+export default withRouter(ButtonAppBar);
