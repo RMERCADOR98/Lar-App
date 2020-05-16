@@ -50,7 +50,7 @@ class Confirm extends Component {
         <List>
           <ListItemText primary="Nome Completo" secondary={nomeCompleto} />
           <ListItemText primary="Alcunha" secondary={alcunha} />
-          <ListItemText primary="Data de Nascimento" />
+          <ListItemText primary="Data de Nascimento" secondary={nascimento} />
           <ListItemText primary="Sexo" secondary={sexo} />
           <ListItemText primary="Estado civil" secondary={estadoCivil} />
           <ListItemText primary="Nacionalidade" secondary={nacionalidade} />

@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux"; //para que o component tenha acesso á redux store
+import { createUtente } from "../Store/Actions/utenteActions";
 
 class AddUtente extends Component {
   state = {
-    nome: null,
-    idade: null,
-    eCivil: null,
+    nome: "",
+    idade: "",
+    eCivil: "",
   };
   handleChange = (e) => {
     this.setState({
@@ -14,15 +16,18 @@ class AddUtente extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.addUtente(this.state);
-    this.setState({
-      nome: "",
-      idade: "",
-      eCivil: "",
-    });
+    // this.props.addUtente(this.state);
+    // this.setState({
+    //   nome: "",
+    //   idade: "",
+    //   eCivil: "",
+    // });
+    this.props.createUtente(this.state);
   };
 
   render() {
+    const props = this.props;
+    console.log(props);
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -42,4 +47,10 @@ class AddUtente extends Component {
   }
 }
 
-export default AddUtente;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createUtente: (utente) => dispatch(createUtente(utente)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AddUtente);

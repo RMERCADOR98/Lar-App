@@ -18,11 +18,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Utente = ({ utentes, deleteUtente }) => {
+const Utente = ({ utente, deleteUtente }) => {
   const classes = useStyles();
-  const listaUtentes = utentes.map((utente) => {
-    return (
-      <Grid item xs={12} sm={6} md={4} lg={2} xl={2} key={utente.id}>
+
+  return (
+    <Grid container fluid="true" justify="center">
+      <Grid item xs={12} sm={6} md={4} lg={2} xl={2}>
         <Paper className={classes.gridPaper} justify="center">
           <Avatar
             variant="circle"
@@ -30,8 +31,6 @@ const Utente = ({ utentes, deleteUtente }) => {
             src={process.env.PUBLIC_URL + "img/oldLady.jpg"}
           />
           <p>
-            <b>id : {utente.id}</b>
-            <br />
             <b>{utente.nome}</b>
             <br />
             Idade: {utente.idade}
@@ -39,24 +38,9 @@ const Utente = ({ utentes, deleteUtente }) => {
             Estado civil: {utente.eCivil}
             <br />
           </p>
-          <button
-            onClick={() => {
-              deleteUtente(utente.id);
-            }}
-          >
-            Apagar Utente
-          </button>
         </Paper>
       </Grid>
-    );
-  });
-
-  return (
-    <div className={classes.root}>
-      <Grid container fluid="true" justify="center">
-        {listaUtentes}
-      </Grid>
-    </div>
+    </Grid>
   );
 };
 
