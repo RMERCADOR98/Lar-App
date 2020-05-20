@@ -1,10 +1,14 @@
 import utenteReducer from "./utenteReducer";
+import authReducer from "./authReducer";
 import { combineReducers } from "redux";
 import { firestoreReducer } from "redux-firestore";
+import { firebaseReducer } from "react-redux-firebase";
 
 const rootReducer = combineReducers({
+  auth: authReducer,
   utente: utenteReducer,
-  firestore: firestoreReducer, // vai automaticamente ligar a bd da firestore com o state da store no background
+  firestore: firestoreReducer,
+  firebase: firebaseReducer,
 });
 
 export default rootReducer;

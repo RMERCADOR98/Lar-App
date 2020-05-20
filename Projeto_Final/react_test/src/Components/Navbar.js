@@ -3,7 +3,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -21,6 +21,12 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import { Link, withRouter } from "react-router-dom";
+
+import { compose } from "redux";
+import { connect } from "react-redux";
+
+import SignedInLinks from "../Layout/AuthLinks/SignedInLinks";
+import SignedOutLinks from "../Layout/AuthLinks/SignedOutLinks";
 
 const drawerWidth = 240;
 
@@ -94,7 +100,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ButtonAppBar = ({ children }) => {
+const ButtonAppBar = ({ children, auth }) => {
+  console.log(auth);
+
+  const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -110,14 +120,19 @@ const ButtonAppBar = ({ children }) => {
   const drawer = (
     <div>
       <List>
-        <ListItem button component={Link} to="/">
+        <ListItem button component={Link} to="/" onClick={handleDrawerClose}>
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
           <ListItemText>Utentes</ListItemText>
         </ListItem>
 
-        <ListItem button component={Link} to="/Familiares">
+        <ListItem
+          button
+          component={Link}
+          to="/Familiares"
+          onClick={handleDrawerClose}
+        >
           <ListItemIcon>
             <PersonIcon />
           </ListItemIcon>
@@ -149,7 +164,8 @@ const ButtonAppBar = ({ children }) => {
           <Typography variant="h6" className={classes.title}>
             Logo
           </Typography>
-          <Button color="inherit">Sair</Button>
+
+          {links}
         </Toolbar>
       </AppBar>
       {/* Drawer */}
@@ -164,7 +180,7 @@ const ButtonAppBar = ({ children }) => {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
@@ -189,4 +205,11 @@ const ButtonAppBar = ({ children }) => {
   );
 };
 
-export default withRouter(ButtonAppBar);
+const mapStateToProps = (state) => {
+  // console.log(state);
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+export default compose(connect(mapStateToProps), withRouter)(ButtonAppBar);

@@ -38,14 +38,18 @@ export const deleteUtente = (utenteId) => {
   };
 };
 
-export const updateUtente = ({ utente }) => {
+export const updateUtente = (utente) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     //make async call to database
 
     const firestore = getFirestore();
+
+    const Uid = utente.Id;
+    console.log(Uid);
+
     firestore
       .collection("utentes")
-      .doc("FPAY4Bw5VmJeGVINkQXc")
+      .doc(Uid)
       .update({
         ...utente,
         authorFirstName: "Lar",

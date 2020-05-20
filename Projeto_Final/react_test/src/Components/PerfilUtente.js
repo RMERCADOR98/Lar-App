@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux"; //conecta o component com o redux
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
-import { deleteUtente } from "../Store/Actions/utenteActions";
+import { deleteUtente } from "../Store/Actions/UtenteActions";
 import EditarUtente from "./EditarUtente";
 
 import { BrowserRouter as Router } from "react-router-dom";
@@ -42,11 +42,13 @@ const PerfilUtente = (props) => {
   if (utente) {
     return (
       <div
-        style={{
-          background: "rgb(66, 133, 244)",
-          width: "100%",
-          height: 1000,
-        }}
+        style={
+          {
+            // background: "rgb(66, 133, 244)",
+            // width: "100%",
+            // height: "100%",
+          }
+        }
       >
         <Container>
           <div>

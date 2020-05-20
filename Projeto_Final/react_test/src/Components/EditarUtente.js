@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux"; //para que o component tenha acesso á redux store
-import { updateUtente } from "../Store/Actions/utenteActions";
+import { updateUtente } from "../Store/Actions/UtenteActions";
 
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -9,6 +9,7 @@ import { withRouter } from "react-router-dom";
 
 class EditarUtente extends Component {
   state = {
+    Id: this.props.id,
     nome: "",
     idade: "",
     eCivil: "",
@@ -25,21 +26,15 @@ class EditarUtente extends Component {
   };
 
   render() {
-    const utenteId = this.props.match.params.id;
-    console.log(utenteId);
+    // const utente = this.props.match.params.id;
+    // console.log(utente);
+
+    const { utente } = this.props;
+    console.log(utente);
 
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          {/* <label htmlFor="nome">Nome:</label>
-          <input
-            type="hiden"
-            disabled
-            id="nome"
-            onChange={this.handleChange}
-            value={utenteId}
-          />
-          <br /> */}
           <label htmlFor="nome">Nome:</label>
           <input type="text" id="nome" onChange={this.handleChange} />
           <br />
@@ -47,33 +42,19 @@ class EditarUtente extends Component {
           <input type="text" id="idade" onChange={this.handleChange} />
           <br />
           <label htmlFor="eCivil">Estado Civil:</label>
-          <input type="text" id="eCivil" onChange={this.handleChange} />
+          <input
+            type="text"
+            id="eCivil"
+            onChange={this.handleChange}
+            value={utente.eCivil}
+          />
           <br />
-          <button
-          // onClick={() => {
-          //   updateUtente(utenteId);
-          // }}
-          >
-            Update
-          </button>
-          >
+          <button>Update</button>>
         </form>
       </div>
     );
   }
 }
-
-// const mapStateToProps = (state, ownProps) => {
-//   //   console.log(ownProps);
-//   const id = ownProps.match.params.id;
-//   const utentes = state.firestore.data.utentes;
-//   //   console.log(utentes);
-//   const utente = utentes ? utentes[id] : null;
-
-//   return {
-//     utente: utente,
-//   };
-// };
 
 const mapStateToProps = (state, ownProps) => {
   console.log(state);
@@ -82,15 +63,17 @@ const mapStateToProps = (state, ownProps) => {
   const utentes = state.firestore.data.utentes;
   console.log(utentes);
   const utente = utentes ? utentes[id] : null;
+  console.log(utente);
 
   return {
     utente: utente,
+    id: id,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateUtente: (utente) => dispatch(updateUtente(utente)),
+    updateUtente: (utente, id) => dispatch(updateUtente(utente, id)),
   };
 };
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux"; //para que o component tenha acesso á redux store
-import { createUtente } from "../Store/Actions/utenteActions";
+import { createUtente } from "../Store/Actions/UtenteActions";
 
 class AddUtente extends Component {
   state = {

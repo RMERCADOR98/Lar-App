@@ -16,11 +16,16 @@ import { ReactReduxFirebaseProvider, getFirebase } from "react-redux-firebase";
 import fbConfig from "./Config/fbConfig";
 import firebase from "firebase/app";
 
+import { useSelector } from "react-redux";
+import { isLoaded } from "react-redux-firebase";
+
+import CircularIndeterminate from "./LoadingIndex";
+
 const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
-    reduxFirestore(fbConfig)
+    reduxFirestore(fbConfig, { attachAuthIsReady: true })
   )
 );
 
@@ -29,14 +34,28 @@ const rrfProps = {
   config: fbConfig,
   dispatch: store.dispatch,
   createFirestoreInstance,
+  userProfile: "users", // where profiles are stored in database
+  presence: "presence", // where list of online users is stored in database
+  sessions: "sessions",
 };
+
+function AuthIsLoaded({ children }) {
+  const auth = useSelector((state) => state.firebase.auth);
+  if (!isLoaded(auth))
+    return (
+      <div>
+        <CircularIndeterminate />
+      </div>
+    );
+  return children;
+}
 
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <React.StrictMode>
+      <AuthIsLoaded>
         <App />
-      </React.StrictMode>
+      </AuthIsLoaded>
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById("root")

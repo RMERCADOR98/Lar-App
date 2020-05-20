@@ -14,28 +14,51 @@ import {
   Switch,
 } from "react-router-dom";
 
+import SignIn from "./Layout/Auth/SignIn";
+import SignUp from "./Layout/Auth/SignUp";
+
+import "./index.css";
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { color: "" };
+  }
+
+  changeColor = (color) => {
+    this.setState({ color });
+  };
   render() {
     return (
-      <div>
+      <div style={{ background: this.state.color }}>
         <Router>
           <ButtonAppBar>
-            <NavLink to={"/"} exact activeStyle={{ color: "green" }}>
+            {/* <NavLink
+              to={"/"}
+              exact
+              activeStyle={{ color: "green" }}
+              onClick={() => this.changeColor("#fff")}
+            >
               Utentes
             </NavLink>
-            <br />
+            <br /> */}
 
-            <NavLink to={"/Utente"} exact activeStyle={{ color: "green" }}>
+            {/* <NavLink
+              to={"/Utente/:id"}
+              exact
+              activeStyle={{ color: "green" }}
+              onClick={() => this.changeColor("rgb(66, 133, 244)")}
+            >
               Utente
-            </NavLink>
+            </NavLink> */}
 
-            <br />
+            {/* <br />
             <NavLink to={"/Alimentação"} exact activeStyle={{ color: "green" }}>
               Alimentação
             </NavLink>
-            <br />
+            <br /> */}
 
-            <NavLink to={"/Saúde"} exact activeStyle={{ color: "green" }}>
+            {/* <NavLink to={"/Saúde"} exact activeStyle={{ color: "green" }}>
               Saúde
             </NavLink>
             <br />
@@ -52,7 +75,7 @@ class App extends Component {
               Familiares
             </NavLink>
 
-            <br />
+            <br /> */}
 
             <Switch>
               <Route exact path="/" component={Utentes} />
@@ -62,6 +85,9 @@ class App extends Component {
               <Route exact path="/Informações" component={Info} />
               <Route exact path="/Bem-Estar" component={BemEstar} />
               <Route exact path="/Familiares" component={Familiares} />
+
+              <Route path="/signin" component={SignIn} />
+              <Route path="/signup" component={SignUp} />
             </Switch>
           </ButtonAppBar>
         </Router>
