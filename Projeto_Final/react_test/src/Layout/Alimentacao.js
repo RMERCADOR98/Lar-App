@@ -4,6 +4,9 @@ import AddRefeicao from "../Components/AddRefeicao";
 
 import FormDialogaddAlimentacao from "../Components/Forms/addAlimentacao/addAlimentacao";
 
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+
 class Alimentacao extends Component {
   state = {
     refeicoes: [
@@ -42,6 +45,8 @@ class Alimentacao extends Component {
   };
 
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div>
         <h1> Todos as refeicoes</h1>
@@ -58,4 +63,11 @@ class Alimentacao extends Component {
   }
 }
 
-export default Alimentacao;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+export default connect(mapStateToProps)(Alimentacao);

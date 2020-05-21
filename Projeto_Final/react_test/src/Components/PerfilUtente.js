@@ -12,9 +12,12 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { deleteUtente } from "../Store/Actions/UtenteActions";
 import EditarUtente from "./EditarUtente";
-
-import { BrowserRouter as Router } from "react-router-dom";
-import { Route, NavLink } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Redirect,
+} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,14 +33,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PerfilUtente = (props) => {
-  const { utente, deleteUtente } = props;
-
-  console.log(props);
+  const { utente, deleteUtente, auth } = props;
 
   let utenteId = props.match.params.id;
 
   console.log(utenteId);
   const classes = useStyles();
+  if (!auth.uid) return <Redirect to="/signin" />;
 
   if (utente) {
     return (
@@ -162,6 +164,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     utente: utente,
+    auth: state.firebase.auth,
   };
 };
 

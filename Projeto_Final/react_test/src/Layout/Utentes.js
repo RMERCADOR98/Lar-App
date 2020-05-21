@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 
+import { Redirect } from "react-router-dom";
+
 class Utentes extends Component {
   // state = {
   //   utentes: [
@@ -37,7 +39,8 @@ class Utentes extends Component {
 
   render() {
     // console.log(this.props);
-    const { utentes } = this.props;
+    const { utentes, auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
     return (
       // <div>
       //   <h1> Todos os utentes</h1>
@@ -60,6 +63,7 @@ class Utentes extends Component {
 const mapStateToProps = (state) => {
   return {
     utentes: state.firestore.ordered.utentes,
+    auth: state.firebase.auth,
   };
 };
 

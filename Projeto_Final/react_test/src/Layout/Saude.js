@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import SaudeUtente from "../Components/SaudeUtente/SaudeUtente";
+import { connect } from "react-redux"; //para que o component tenha acesso á redux store
+import { Redirect } from "react-router-dom";
 
 class Saude extends Component {
   state = {
@@ -15,6 +17,8 @@ class Saude extends Component {
   };
 
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div>
         <h1> Saúde</h1>
@@ -25,4 +29,11 @@ class Saude extends Component {
   }
 }
 
-export default Saude;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+export default connect(mapStateToProps)(Saude);

@@ -4,6 +4,9 @@ import AddBemEstar from "../Components/AddBemEstar";
 
 import FormDialogaddBemEstar from "../Components/Forms/addBemEstar/addBemEstar";
 
+import { connect } from "react-redux"; //para que o component tenha acesso á redux store
+import { Redirect } from "react-router-dom";
+
 class BemEstar extends Component {
   state = {
     bes: [
@@ -43,6 +46,8 @@ class BemEstar extends Component {
   };
 
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div>
         <h1> Bem Estar</h1>
@@ -56,4 +61,11 @@ class BemEstar extends Component {
   }
 }
 
-export default BemEstar;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+export default connect(mapStateToProps)(BemEstar);

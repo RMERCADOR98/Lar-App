@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import InfoUtente from "../Components/Info/InfoUtente";
+import { connect } from "react-redux"; //para que o component tenha acesso á redux store
+import { Redirect } from "react-router-dom";
 
 class Info extends Component {
   state = {
@@ -16,6 +18,8 @@ class Info extends Component {
   };
 
   render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div>
         <h1> Informações</h1>
@@ -26,4 +30,11 @@ class Info extends Component {
   }
 }
 
-export default Info;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth,
+  };
+};
+
+export default connect(mapStateToProps)(Info);
