@@ -21,23 +21,32 @@ const useStyles = makeStyles((theme) => ({
 const Utente = ({ utente }) => {
   const classes = useStyles();
 
+  // const idade = new Date() - new Date(utente.nascimento * 1000);
+  console.log(utente.createdAt);
+  console.log(utente.nascimento);
+  const idade = utente.nascimento;
+  console.log(idade);
+
   return (
     <Grid item xs={12} key={utente.id}>
-      <Paper className={classes.gridPaper} justify="center">
+      <div className={classes.gridPaper} justify="center">
         <Avatar
           variant="circle"
           className={classes.large}
           src={process.env.PUBLIC_URL + "img/oldLady.jpg"}
         />
         <p>
-          <b>{utente.nome}</b>
+          <b>{utente.alcunha}</b>
           <br />
-          Idade: {utente.idade}
+          Idade:
+          {new Date(utente.createdAt.seconds * 1000).toLocaleDateString(
+            "pt-PT"
+          )}
           <br />
-          Estado civil: {utente.eCivil}
+          Estado civil: {utente.estadoCivil}
           <br />
         </p>
-      </Paper>
+      </div>
     </Grid>
   );
 };

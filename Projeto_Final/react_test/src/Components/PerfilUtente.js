@@ -6,6 +6,7 @@ import ImageAvatars from "./Perfil Utente/perfilUtente";
 import Button from "@material-ui/core/Button";
 import { Grid } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import BotaoFamiliar from "./Perfil Utente/BotaoFamiliar";
 
 import { connect } from "react-redux"; //conecta o component com o redux
 import { firestoreConnect } from "react-redux-firebase";
@@ -19,10 +20,12 @@ import {
   Redirect,
 } from "react-router-dom";
 
+import BadgePerfilUtente from "./Badges/BadgePerfilUtente";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-
+    marginTop: theme.spacing(3),
     textAlign: "center",
   },
   paper: {
@@ -42,109 +45,145 @@ const PerfilUtente = (props) => {
   if (!auth.uid) return <Redirect to="/signin" />;
 
   if (utente) {
+    console.log(utente);
     return (
       <div
-        style={
-          {
-            // background: "rgb(66, 133, 244)",
-            // width: "100%",
-            // height: "100%",
-          }
-        }
+        style={{
+          flex: 1,
+        }}
       >
-        <Container>
-          <div>
-            <Card className={classes.root}>
-              <ImageAvatars />
-              <span>Utente ID : {utenteId}</span>
-              <br />
-              <span>Nome : {utente.nome}</span>
-              <br />
-              <span>Estado Civil : {utente.eCivil}</span>
-              <br />
-              <Grid container fluid spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <Link to={"/Alimentação"} style={{ textDecoration: "none" }}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{ width: "90%", height: 80, marginLeft: 25 }}
-                    >
-                      Alimentação
-                    </Button>
-                  </Link>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Link to={"/Informações"} style={{ textDecoration: "none" }}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{ width: "90%", height: 80, marginRight: 25 }}
-                    >
-                      Informações
-                    </Button>
-                  </Link>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Link to={"/Saúde"} style={{ textDecoration: "none" }}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{
-                        width: "90%",
-                        height: 80,
-                        marginLeft: 25,
-                        marginTop: 6,
-                      }}
-                    >
-                      Saúde
-                    </Button>
-                  </Link>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Link to={"/Bem-Estar"} style={{ textDecoration: "none" }}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      style={{
-                        width: "90%",
-                        height: 80,
-                        marginRight: 25,
-                        marginTop: 6,
-                        marginBottom: 30,
-                      }}
-                    >
-                      Bem-Estar
-                    </Button>
-                  </Link>
-                </Grid>
-              </Grid>
-              <Router>
-                <Route path="/editarUtente/:id" component={EditarUtente} />
+        <Container className={classes.root}>
+          {/* <BadgePerfilUtente> */}
 
-                <div key={utente.id}>
-                  <NavLink
-                    to={"/editarUtente/" + utenteId}
-                    exact
-                    activeStyle={{ color: "green" }}
-                  >
-                    {/* <EditarUtente utenteId={utenteId} /> */}
-                    HEre
-                  </NavLink>
-                </div>
-                <br />
-              </Router>
-              <br />
-              <button
-                onClick={() => {
-                  deleteUtente(utenteId);
-                  props.history.push("/");
+          <Card>
+            <Grid
+              container
+              fluid
+              style={{
+                flex: 1,
+                alignItems: "center",
+              }}
+            >
+              <Grid item lg={4}>
+                <ImageAvatars />
+              </Grid>
+              <Grid
+                item
+                lg={4}
+                style={{
+                  flex: 1,
+                  textAlign: "justify",
+                  alignItems: "center",
                 }}
               >
-                Delete
-              </button>
-            </Card>
-          </div>
+                <span>
+                  <b>Nome:</b> {utente.nome}
+                </span>
+                <br />
+                <span>
+                  <b>Entrada:</b>{" "}
+                  {new Date(utente.createdAt.seconds * 1000).toLocaleDateString(
+                    "pt-PT"
+                  )}
+                </span>
+                <br />
+              </Grid>
+              <Grid item xs={4}>
+                <BotaoFamiliar />
+              </Grid>
+            </Grid>
+            <Grid container fluid spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <Link to={"/Alimentação"} style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="contained"
+                    style={{
+                      width: "90%",
+                      height: 80,
+                      marginLeft: 25,
+                      background: "white",
+                    }}
+                  >
+                    Alimentação
+                  </Button>
+                </Link>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Link to={"/Informações"} style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="contained"
+                    style={{
+                      width: "90%",
+                      height: 80,
+                      marginRight: 25,
+                      background: "white",
+                    }}
+                  >
+                    Informações
+                  </Button>
+                </Link>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Link to={"/Saúde"} style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="contained"
+                    style={{
+                      width: "90%",
+                      height: 80,
+                      marginLeft: 25,
+                      marginTop: 6,
+                      background: "white",
+                    }}
+                  >
+                    Saúde
+                  </Button>
+                </Link>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <Link to={"/Bem-Estar"} style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="contained"
+                    style={{
+                      width: "90%",
+                      height: 80,
+                      marginRight: 25,
+                      marginTop: 6,
+                      marginBottom: 30,
+                      background: "white",
+                    }}
+                  >
+                    Bem-Estar
+                  </Button>
+                </Link>
+              </Grid>
+            </Grid>
+            <Router>
+              <Route path="/editarUtente/:id" component={EditarUtente} />
+
+              <div key={utente.id}>
+                <NavLink
+                  to={"/editarUtente/" + utenteId}
+                  exact
+                  activeStyle={{ color: "green" }}
+                >
+                  {/* <EditarUtente utenteId={utenteId} /> */}
+                  HEre
+                </NavLink>
+              </div>
+              <br />
+            </Router>
+            <br />
+            <button
+              onClick={() => {
+                deleteUtente(utenteId);
+                props.history.push("/");
+              }}
+            >
+              Delete
+            </button>
+          </Card>
+
+          {/* </BadgePerfilUtente> */}
         </Container>
       </div>
     );

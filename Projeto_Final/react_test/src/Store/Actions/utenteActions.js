@@ -52,9 +52,6 @@ export const updateUtente = (utente) => {
       .doc(Uid)
       .update({
         ...utente,
-        authorFirstName: "Lar",
-        authorId: 123,
-        createdAt: new Date(),
       })
       .then(() => {
         dispatch({ type: "UPDATE_UTENTE", utente });

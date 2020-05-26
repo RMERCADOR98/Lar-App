@@ -95,8 +95,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
   },
   link: {
+    color: "white",
     textDecoration: "none",
-    color: theme.palette.text.primary,
   },
 }));
 
@@ -162,7 +162,9 @@ const ButtonAppBar = ({ children, auth }) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Logo
+            <Link to="/" className={classes.link}>
+              Logo
+            </Link>
           </Typography>
 
           {links}
@@ -180,7 +182,7 @@ const ButtonAppBar = ({ children, auth }) => {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton>
+          <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (

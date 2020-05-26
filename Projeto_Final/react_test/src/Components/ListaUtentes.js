@@ -21,7 +21,10 @@ const ProjectList = ({ utentes }) => {
         {utentes &&
           utentes.map((utente) => {
             return (
-              <Link to={"/utente/" + utente.id}>
+              <Link
+                to={"/utente/" + utente.id}
+                style={{ textDecoration: "none" }}
+              >
                 <Utente utente={utente} />
               </Link>
             );

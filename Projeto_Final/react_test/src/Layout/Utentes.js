@@ -53,7 +53,7 @@ class Utentes extends Component {
 
       <div>
         <ListaUtentes utentes={utentes} />
-        <AddUtente />
+        {/* <AddUtente /> */}
         <FormDialog />
       </div>
     );
@@ -61,6 +61,7 @@ class Utentes extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state);
   return {
     utentes: state.firestore.ordered.utentes,
     auth: state.firebase.auth,
@@ -69,5 +70,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: "utentes" }])
+  firestoreConnect([{ collection: "utentes", orderBy: ["createdAt", "desc"] }])
 )(Utentes);

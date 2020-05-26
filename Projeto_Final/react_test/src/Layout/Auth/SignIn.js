@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { signIn } from "../../Store/Actions/authActions";
 import { Redirect } from "react-router-dom";
 
+import SignInForm from "./signInForm";
+
 class SignIn extends Component {
   state = {
     email: "",
@@ -25,9 +27,12 @@ class SignIn extends Component {
   render() {
     const { authError, auth } = this.props;
     if (auth.uid) return <Redirect to="/" />;
+    const error = authError;
+    console.log(error);
+
     return (
       <div className="container">
-        <form className="white" onSubmit={this.handleSubmit}>
+        {/* <form className="white" onSubmit={this.handleSubmit}>
           <h5 className="grey-text text-darken-3">Sign In</h5>
           <div className="input-field">
             <label htmlfor="email">Email</label>
@@ -43,7 +48,12 @@ class SignIn extends Component {
               {authError ? <p>{authError}</p> : null}
             </div>
           </div>
-        </form>
+        </form> */}
+        <SignInForm
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          error={error}
+        />
       </div>
     );
   }

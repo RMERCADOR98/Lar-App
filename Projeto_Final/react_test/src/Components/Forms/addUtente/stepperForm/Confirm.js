@@ -13,7 +13,6 @@ class Confirm extends Component {
     e.preventDefault();
     this.props.prevStep();
   };
-
   render() {
     const {
       values: {
@@ -37,7 +36,7 @@ class Confirm extends Component {
       },
     } = this.props;
 
-    console.log(nascimento);
+    console.log(this.props);
 
     const styles = {
       button: {
@@ -50,12 +49,15 @@ class Confirm extends Component {
         <List>
           <ListItemText primary="Nome Completo" secondary={nomeCompleto} />
           <ListItemText primary="Alcunha" secondary={alcunha} />
-          <ListItemText primary="Data de Nascimento" secondary={nascimento} />
+          <ListItemText
+            primary="Data de Nascimento"
+            secondary={nascimento.toLocaleDateString("pt-PT")}
+          />
           <ListItemText primary="Sexo" secondary={sexo} />
           <ListItemText primary="Estado civil" secondary={estadoCivil} />
           <ListItemText primary="Nacionalidade" secondary={nacionalidade} />
-          <ListItemText primary="Altura" secondary={altura} />
-          <ListItemText primary="Peso" secondary={peso} />
+          <ListItemText primary="Altura" secondary={altura + " cm"} />
+          <ListItemText primary="Peso" secondary={peso + " kg"} />
           <ListItemText primary="Nº Cartão Cidadão" secondary={nCartaoCidade} />
           <ListItemText primary="Nº Contribuinte" secondary={nContribuinte} />
           <ListItemText
@@ -84,10 +86,10 @@ class Confirm extends Component {
         <Button
           variant="contained"
           color="primary"
-          onClick={this.continue}
+          onClick={this.props.handleSubmit}
           className={styles.button}
         >
-          Continue
+          Confirmar
         </Button>
       </Fragment>
     );

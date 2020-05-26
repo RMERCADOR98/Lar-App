@@ -58,7 +58,7 @@ const FormDialogaddUtentes = () => {
           <DialogContentText>
             Complete o formulário para adicionar um novo utente
           </DialogContentText>
-          <UserForm />
+          <UserForm handleClose={handleClose} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

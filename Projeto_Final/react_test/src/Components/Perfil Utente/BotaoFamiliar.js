@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
+import GroupIcon from "@material-ui/icons/Group";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,12 +11,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   large: {
-    width: theme.spacing(25),
-    height: theme.spacing(25),
+    width: theme.spacing(12),
+    height: theme.spacing(12),
   },
 }));
 
-export default function ImageAvatars() {
+export default function BotaoFamiliar() {
   const classes = useStyles();
 
   return (
@@ -24,7 +25,10 @@ export default function ImageAvatars() {
         alt="Remy Sharp"
         src="/static/images/avatar/1.jpg"
         className={classes.large}
-      />
+        style={{ background: "#fdd835" }}
+      >
+        <GroupIcon style={{ color: "#000" }} fontSize="large" />
+      </Avatar>
     </div>
   );
 }

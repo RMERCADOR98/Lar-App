@@ -8,6 +8,9 @@ import NNN from "./NNN";
 import GDA from "./GDA";
 import CCM from "./CCM";
 
+import { createUtente } from "../../../../Store/Actions/UtenteActions";
+import { connect } from "react-redux"; //para que o component tenha acesso á redux store
+
 export class UserForm extends Component {
   state = {
     step: 1,
@@ -67,6 +70,12 @@ export class UserForm extends Component {
     this.setState({
       nascimento: date,
     });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.createUtente(this.state);
+    this.props.handleClose();
   };
 
   render() {
@@ -184,13 +193,18 @@ export class UserForm extends Component {
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             values={values}
+            handleSubmit={this.handleSubmit}
           />
         );
-      case 8:
-        return <Sucess />;
+
       default:
     }
   }
 }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createUtente: (utente) => dispatch(createUtente(utente)),
+  };
+};
 
-export default UserForm;
+export default connect(null, mapDispatchToProps)(UserForm);
