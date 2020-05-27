@@ -21,11 +21,11 @@ const useStyles = makeStyles((theme) => ({
 const Utente = ({ utente }) => {
   const classes = useStyles();
 
-  // const idade = new Date() - new Date(utente.nascimento * 1000);
-  console.log(utente.createdAt);
-  console.log(utente.nascimento);
-  const idade = utente.nascimento;
-  console.log(idade);
+  const nasc = utente.nascimento.toDate();
+  const hoje = new Date();
+
+  const idademili = Math.abs(hoje - nasc);
+  const idade = parseInt(idademili / 31556952000);
 
   return (
     <Grid item xs={12} key={utente.id}>
@@ -38,10 +38,7 @@ const Utente = ({ utente }) => {
         <p>
           <b>{utente.alcunha}</b>
           <br />
-          Idade:
-          {new Date(utente.createdAt.seconds * 1000).toLocaleDateString(
-            "pt-PT"
-          )}
+          Idade: {idade}
           <br />
           Estado civil: {utente.estadoCivil}
           <br />
