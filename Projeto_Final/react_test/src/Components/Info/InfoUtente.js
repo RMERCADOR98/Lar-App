@@ -18,32 +18,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const InfoUtente = ({ infos }) => {
+const InfoUtente = ({ infos, utente }) => {
   const classes = useStyles();
+  console.log(utente);
   return (
-    <Paper className={classes.gridPaper} justify="center">
-      <p>
-        <b>Nome:</b> {infos.nome}
-        <br />
-        <br />
-        <b>Alcunha:</b> {infos.alcunha}
-        <br />
-        <br />
-        <b>Idade:</b> {infos.idade}
-        <br />
-        <br />
-        <b>Altura:</b> {infos.altura}
-        <br />
-        <br />
-        <b>Estado Civil:</b> {infos.estadoCivil}
-        <br />
-        <br />
-        <b>Data de nascimento:</b> {infos.dataNascimento}
-        <br />
-        <br />
-        <b>Nacionalidade:</b> {infos.nacionalidade}
-        <br />
-      </p>
+    <Paper className={classes.gridPaper} justify="center" key={utente.id}>
+      <div>
+        <p>
+          <b>Nome:</b> {utente.nome}
+          <br />
+          <br />
+          <b>Alcunha:</b> {utente.alcunha}
+          <br />
+          <br />
+          <b>Idade:</b> {utente.idade}
+          <br />
+          <br />
+          <b>Altura:</b> {utente.altura}
+          <br />
+          <br />
+          <b>Estado Civil:</b> {utente.estadoCivil}
+          <br />
+          <br />
+          <b>Data de nascimento:</b> {utente.dataNascimento}
+          <br />
+          <br />
+          <b>Nacionalidade:</b> {utente.nacionalidade}
+          <br />
+        </p>
+      </div>
     </Paper>
   );
 };

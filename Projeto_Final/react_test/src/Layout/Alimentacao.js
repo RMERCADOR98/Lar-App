@@ -7,6 +7,9 @@ import FormDialogaddAlimentacao from "../Components/Forms/addAlimentacao/addAlim
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+
 class Alimentacao extends Component {
   state = {
     refeicoes: [
@@ -45,7 +48,7 @@ class Alimentacao extends Component {
   };
 
   render() {
-    const { auth } = this.props;
+    const { auth, utentes, id } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div>
@@ -54,6 +57,7 @@ class Alimentacao extends Component {
         <AlimentacaoUtente
           refeicoes={this.state.refeicoes}
           deleteRefeicao={this.deleteRefeicao}
+          utentes={utentes}
         />
 
         <AddRefeicao addRefeicao={this.addRefeicao} />
@@ -63,11 +67,24 @@ class Alimentacao extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
+const mapStateToProps = (state, ownProps) => {
+  const id = ownProps.match.params.id;
+  // console.log(id);
+  // console.log(state);
   return {
+    id: id,
+    utentes: state.firestore.ordered.utentes,
     auth: state.firebase.auth,
   };
 };
 
-export default connect(mapStateToProps)(Alimentacao);
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect((props) => [
+    {
+      collection: "utentes",
+      doc: props.id,
+      // subcollections: [{ collection: "Alimentação" }],
+    },
+  ])
+)(Alimentacao);

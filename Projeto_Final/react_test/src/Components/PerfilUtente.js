@@ -22,6 +22,8 @@ import {
 
 import BadgePerfilUtente from "./Badges/BadgePerfilUtente";
 
+import Info from "../Layout/Info";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -36,11 +38,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PerfilUtente = (props) => {
-  const { utente, deleteUtente, auth } = props;
+  const {
+    utente,
+    deleteUtente,
+    auth,
+    match: { url },
+  } = props;
 
   let utenteId = props.match.params.id;
 
   console.log(utenteId);
+
+  console.log(url);
+
   const classes = useStyles();
   if (!auth.uid) return <Redirect to="/signin" />;
 
@@ -94,7 +104,11 @@ const PerfilUtente = (props) => {
             </Grid>
             <Grid container fluid spacing={2}>
               <Grid item xs={12} sm={6}>
-                <Link to={"/Alimentação"} style={{ textDecoration: "none" }}>
+                <Link
+                  exact
+                  to={"/Alimentação"}
+                  style={{ textDecoration: "none" }}
+                >
                   <Button
                     variant="contained"
                     style={{
@@ -109,7 +123,10 @@ const PerfilUtente = (props) => {
                 </Link>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Link to={"/Informações"} style={{ textDecoration: "none" }}>
+                <Link
+                  to={"/Informações/" + utenteId}
+                  style={{ textDecoration: "none" }}
+                >
                   <Button
                     variant="contained"
                     style={{

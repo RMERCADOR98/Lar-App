@@ -22,7 +22,7 @@ import "./index.css";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { color: "" };
+    this.state = { color: "lightblue" };
   }
 
   changeColor = (color) => {
@@ -30,59 +30,15 @@ class App extends Component {
   };
   render() {
     return (
-      <div style={{ background: this.state.color }}>
+      <div style={{ background: this.state.color, height: "100vh" }}>
         <Router>
           <ButtonAppBar>
-            {/* <NavLink
-              to={"/"}
-              exact
-              activeStyle={{ color: "green" }}
-              onClick={() => this.changeColor("#fff")}
-            >
-              Utentes
-            </NavLink>
-            <br /> */}
-
-            {/* <NavLink
-              to={"/Utente/:id"}
-              exact
-              activeStyle={{ color: "green" }}
-              onClick={() => this.changeColor("rgb(66, 133, 244)")}
-            >
-              Utente
-            </NavLink> */}
-
-            {/* <br />
-            <NavLink to={"/Alimentação"} exact activeStyle={{ color: "green" }}>
-              Alimentação
-            </NavLink>
-            <br /> */}
-
-            {/* <NavLink to={"/Saúde"} exact activeStyle={{ color: "green" }}>
-              Saúde
-            </NavLink>
-            <br />
-            <NavLink to={"/Informações"} exact activeStyle={{ color: "green" }}>
-              Info
-            </NavLink>
-            <br />
-            <NavLink to={"/Bem-Estar"} exact activeStyle={{ color: "green" }}>
-              Bem Estar
-            </NavLink>
-            <br />
-
-            <NavLink to={"/Familiares"} exact activeStyle={{ color: "green" }}>
-              Familiares
-            </NavLink>
-
-            <br /> */}
-
             <Switch>
               <Route exact path="/" component={Utentes} />
               <Route exact path="/Utente/:id" component={PerfilUtente} />
               <Route exact path="/Alimentação" component={Alimentacao} />
               <Route exact path="/Saúde" component={Saude} />
-              <Route exact path="/Informações" component={Info} />
+              <Route exact path="/Informações/:id" component={Info} />
               <Route exact path="/Bem-Estar" component={BemEstar} />
               <Route exact path="/Familiares" component={Familiares} />
 

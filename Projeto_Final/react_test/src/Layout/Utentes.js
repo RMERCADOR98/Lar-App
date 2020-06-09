@@ -38,7 +38,6 @@ class Utentes extends Component {
   // };
 
   render() {
-    // console.log(this.props);
     const { utentes, auth } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
     return (
@@ -70,5 +69,10 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: "utentes", orderBy: ["createdAt", "desc"] }])
+  firestoreConnect([
+    {
+      collection: "utentes",
+      orderBy: ["createdAt", "desc"],
+    },
+  ])
 )(Utentes);
