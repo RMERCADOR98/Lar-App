@@ -25,15 +25,15 @@ class JO extends Component {
     return (
       <Fragment>
         <TextField
-          label="Jantar"
-          onChange={handleChange("jantar")}
-          defaultValue={values.jantar}
+          label="Lanche"
+          onChange={handleChange("lanche")}
+          defaultValue={values.lanche}
         />
         <br />
         <TextField
-          label="Observações"
-          onChange={handleChange("observacoes")}
-          defaultValue={values.observacoes}
+          label="Jantar"
+          onChange={handleChange("jantar")}
+          defaultValue={values.jantar}
         />
         <br />
         <br />

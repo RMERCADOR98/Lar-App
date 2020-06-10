@@ -16,8 +16,10 @@ class Confirm extends Component {
 
   render() {
     const {
-      values: { pequenoAlmoco, almoco, jantar, observacoes },
+      values: { pequenoAlmoco, almoco, lanche, jantar },
     } = this.props;
+
+    console.log(this.props);
 
     const styles = {
       button: {
@@ -30,8 +32,8 @@ class Confirm extends Component {
         <List>
           <ListItemText primary="Pequeno Almoço" secondary={pequenoAlmoco} />
           <ListItemText primary="Almoço" secondary={almoco} />
+          <ListItemText primary="Lanche" secondary={lanche} />
           <ListItemText primary="Jantar" secondary={jantar} />
-          <ListItemText primary="Observações" secondary={observacoes} />
         </List>
         <Button
           variant="contained"
@@ -45,10 +47,10 @@ class Confirm extends Component {
         <Button
           variant="contained"
           color="primary"
-          onClick={this.continue}
+          onClick={this.props.handleSubmit}
           className={styles.button}
         >
-          Continue
+          Confirmar
         </Button>
       </Fragment>
     );

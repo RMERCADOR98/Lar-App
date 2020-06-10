@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import FNA from "./FNA";
 import NSE from "./NSE";
 import Confirm from "./Confirm";
-import Sucess from "./Sucess";
 import NAP from "./NAP";
 import NNN from "./NNN";
 import GDA from "./GDA";
@@ -79,6 +78,7 @@ export class UserForm extends Component {
   };
 
   render() {
+    console.log(this.props);
     const { step } = this.state;
     const {
       foto,

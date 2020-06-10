@@ -10,6 +10,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+import { connect } from "react-redux"; //conecta o component com o redux
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+import { deleteAlimentacao } from "../../Store/Actions/AlimentacaoActions";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -43,95 +48,83 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AlimentacaoUtente = ({ refeicoes, deleteRefeicao }) => {
+const AlimentacaoUtente = ({ refeicoes, deleteRefeicao, alimento }) => {
   const classes = useStyles();
-  const listaRefeicoes = refeicoes.map((refeicao) => {
-    return (
-      <Grid item xs={12} key={refeicao.id} className={classes.expansionPanel}>
-        <ExpansionPanel>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Grid container fluid="true" justify="center" align="center">
-              <Grid item xs={4}>
-                <Typography className={classes.heading}>
-                  {refeicao.id}
-                </Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography className={classes.heading}>
-                  {refeicao.id}
-                </Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography className={classes.heading}>
-                  {refeicao.id}
-                </Typography>
-              </Grid>
-            </Grid>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails style={{ background: "lightGrey" }}>
-            <Typography>
-              <p>
-                <br />
-                <b>Pequeno Almoço:</b> {refeicao.pequenoAlmoco}
-                <br />
-                <br />
-                <b>Almoço:</b> {refeicao.almoco}
-                <br />
-                <br />
-                <b>Lanche:</b> {refeicao.lanche}
-                <br />
-                <br />
-                <b>Jantar:</b> {refeicao.jantar}
-                <br />
-              </p>
-              <Fab
-                color="secondary"
-                aria-label="edit"
-                onClick={() => {
-                  deleteRefeicao(refeicao.id);
-                }}
-                className={classes.fab}
-              >
-                <DeleteIcon />
-              </Fab>
-            </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <br />
-      </Grid>
-    );
-  });
+
+  // const USERid = utente.alimentacao.id;
+  console.log(alimento.id);
+  // console.log(USERid);
+
+  const alimentoId = alimento.id;
 
   return (
-    <div className={classes.root}>
-      <ExpansionPanel disabled>
+    <Grid item xs={12} className={classes.expansionPanel}>
+      <ExpansionPanel>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel3a-content"
-          id="panel3a-header"
+          aria-controls="panel1a-content"
+          id="panel1a-header"
         >
           <Grid container fluid="true" justify="center" align="center">
             <Grid item xs={4}>
-              <Typography className={classes.heading}>Data</Typography>
+              <Typography className={classes.heading}>cenas</Typography>
             </Grid>
             <Grid item xs={4}>
-              <Typography className={classes.heading}>Alimentação</Typography>
+              <Typography className={classes.heading}>cenas</Typography>
             </Grid>
             <Grid item xs={4}>
-              <Typography className={classes.heading}>Gostou?</Typography>
+              <Typography className={classes.heading}>cenas</Typography>
             </Grid>
           </Grid>
         </ExpansionPanelSummary>
+        <ExpansionPanelDetails style={{ background: "lightGrey" }}>
+          <Typography>
+            <p>
+              <br />
+              <b>Pequeno Almoço:</b> {alimento.pequenoAlmoco}
+              <br />
+              <br />
+              <b>Almoço:</b> {alimento.almoco}
+              <br />
+              <br />
+              <b>Lanche:</b> {alimento.lanche}
+              <br />
+              <br />
+              <b>Jantar:</b> {alimento.jantar}
+              <br />
+            </p>
+            <Fab
+              color="secondary"
+              aria-label="edit"
+              onClick={() => {
+                deleteAlimentacao(alimentoId);
+              }}
+              className={classes.fab}
+            >
+              <DeleteIcon />
+            </Fab>
+          </Typography>
+        </ExpansionPanelDetails>
       </ExpansionPanel>
-      <Grid container fluid="true" justify="center">
-        {listaRefeicoes}
-      </Grid>
-    </div>
+      <br />
+    </Grid>
   );
 };
 
-export default AlimentacaoUtente;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteAlimentacao: (alimentoId) => dispatch(deleteAlimentacao(alimentoId)),
+  };
+};
+
+export default compose(
+  connect(mapDispatchToProps),
+  firestoreConnect((props) => [
+    {
+      collection: "utentes",
+      doc: props.id,
+      subcollections: [{ collection: "alimentacao" }],
+      storeAs: "alimentos",
+    },
+  ])
+)(AlimentacaoUtente);

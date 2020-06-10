@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import InfoUtente from "../Components/Info/InfoUtente";
+
 import { connect } from "react-redux"; //para que o component tenha acesso á redux store
 import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import InfoMap from "../Components/Info/InfoMap";
-import { id } from "date-fns/locale";
-import InfoID from "../Components/Info/InfoID";
 
 class Info extends Component {
   // state = {

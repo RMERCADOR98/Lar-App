@@ -4,15 +4,19 @@ import Sucess from "./Sucess";
 import PA from "./PA";
 import JO from "./JO";
 
-export default class AlimentacaoForm extends Component {
+import { createAlimentacao } from "../../../../Store/Actions/AlimentacaoActions";
+import { connect } from "react-redux"; //para que o component tenha acesso á redux store
+
+class AlimentacaoForm extends Component {
   state = {
     step: 1,
+    Id: this.props.id,
 
     pequenoalmoco: "",
     almoco: "",
 
+    lanche: "",
     jantar: "",
-    observacoes: "",
   };
 
   //proced to the next step
@@ -40,21 +44,28 @@ export default class AlimentacaoForm extends Component {
     });
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.createAlimentacao(this.state);
+    this.props.handleClose();
+  };
+
   render() {
+    console.log(this.props.id);
     const { step } = this.state;
     const {
       pequenoAlmoco,
       almoco,
 
+      lanche,
       jantar,
-      observacoes,
     } = this.state;
     const values = {
       pequenoAlmoco,
       almoco,
 
+      lanche,
       jantar,
-      observacoes,
     };
 
     switch (step) {
@@ -82,11 +93,20 @@ export default class AlimentacaoForm extends Component {
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             values={values}
+            handleSubmit={this.handleSubmit}
           />
         );
-      case 4:
-        return <Sucess />;
+
       default:
     }
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createAlimentacao: (alimentacao) =>
+      dispatch(createAlimentacao(alimentacao)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AlimentacaoForm);

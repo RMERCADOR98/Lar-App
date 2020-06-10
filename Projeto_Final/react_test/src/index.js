@@ -21,13 +21,27 @@ import { isLoaded } from "react-redux-firebase";
 
 import CircularIndeterminate from "./LoadingIndex";
 
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+import { PersistGate } from "redux-persist/integration/react";
+
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistentReducer = persistReducer(persistConfig, rootReducer);
+
 const store = createStore(
-  rootReducer,
+  persistentReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
     reduxFirestore(fbConfig, { attachAuthIsReady: true })
   )
 );
+
+const persistor = persistStore(store);
 
 const rrfProps = {
   firebase,
@@ -52,11 +66,13 @@ function AuthIsLoaded({ children }) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <ReactReduxFirebaseProvider {...rrfProps}>
-      <AuthIsLoaded>
-        <App />
-      </AuthIsLoaded>
-    </ReactReduxFirebaseProvider>
+    <PersistGate loading={null} persistor={persistor}>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <AuthIsLoaded>
+          <App />
+        </AuthIsLoaded>
+      </ReactReduxFirebaseProvider>
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

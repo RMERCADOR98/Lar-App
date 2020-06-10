@@ -9,26 +9,28 @@ import { connect } from "react-redux";
 
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import AlimentacaoMap from "../Components/AlimentacaoUtente/AlimentacaoMap";
+import AlimentacaoTop from "../Components/AlimentacaoUtente/AlimentaçãoTop";
 
 class Alimentacao extends Component {
-  state = {
-    refeicoes: [
-      {
-        pequenoAlmoco: "Torrada com manteiga e meia de leite",
-        almoco: "Chanfana com batatas cozidas",
-        lanche: "Cerelac",
-        jantar: "Batatas a murro com Bacalhau",
-        id: 1,
-      },
-      {
-        pequenoAlmoco: "Torrada com geleia e meia de leite",
-        almoco: "Jardineira",
-        lanche: "Pão com Chouriço e sumo de laranja",
-        jantar: "Batatas cozidas com Maruca",
-        id: 2,
-      },
-    ],
-  };
+  // state = {
+  //   refeicoes: [
+  //     {
+  //       pequenoAlmoco: "Torrada com manteiga e meia de leite",
+  //       almoco: "Chanfana com batatas cozidas",
+  //       lanche: "Cerelac",
+  //       jantar: "Batatas a murro com Bacalhau",
+  //       id: 1,
+  //     },
+  //     {
+  //       pequenoAlmoco: "Torrada com geleia e meia de leite",
+  //       almoco: "Jardineira",
+  //       lanche: "Pão com Chouriço e sumo de laranja",
+  //       jantar: "Batatas cozidas com Maruca",
+  //       id: 2,
+  //     },
+  //   ],
+  // };
 
   addRefeicao = (refeicao) => {
     refeicao.id = Math.random();
@@ -48,20 +50,24 @@ class Alimentacao extends Component {
   };
 
   render() {
-    const { auth, utentes, id } = this.props;
+    const { auth, alimentacao, id } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
+    console.log(id);
     return (
       <div>
         <h1> Todos as refeicoes</h1>
-
-        <AlimentacaoUtente
-          refeicoes={this.state.refeicoes}
+        <div>
+          <AlimentacaoTop />
+        </div>
+        {/* <AlimentacaoUtente
+          // refeicoes={this.state.refeicoes}
           deleteRefeicao={this.deleteRefeicao}
-          utentes={utentes}
-        />
+          alimentacao={alimentacao}
+        /> */}
 
-        <AddRefeicao addRefeicao={this.addRefeicao} />
-        <FormDialogaddAlimentacao />
+        <AlimentacaoMap alimentacao={alimentacao} id={id} />
+        {/* <AddRefeicao addRefeicao={this.addRefeicao} /> */}
+        <FormDialogaddAlimentacao id={id} />
       </div>
     );
   }
@@ -69,11 +75,13 @@ class Alimentacao extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
-  // console.log(id);
-  // console.log(state);
+  console.log(id);
+  console.log(state.firestore.ordered.alimentos);
+
   return {
     id: id,
     utentes: state.firestore.ordered.utentes,
+    alimentacao: state.firestore.ordered.alimentos,
     auth: state.firebase.auth,
   };
 };
@@ -84,7 +92,8 @@ export default compose(
     {
       collection: "utentes",
       doc: props.id,
-      // subcollections: [{ collection: "Alimentação" }],
+      subcollections: [{ collection: "alimentacao" }],
+      storeAs: "alimentos",
     },
   ])
 )(Alimentacao);

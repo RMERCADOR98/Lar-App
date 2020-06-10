@@ -106,7 +106,7 @@ const PerfilUtente = (props) => {
               <Grid item xs={12} sm={6}>
                 <Link
                   exact
-                  to={"/Alimentação"}
+                  to={"/Alimentação/" + utenteId}
                   style={{ textDecoration: "none" }}
                 >
                   <Button

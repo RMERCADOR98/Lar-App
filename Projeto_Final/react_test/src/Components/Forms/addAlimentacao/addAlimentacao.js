@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FormDialogaddAlimentacao = () => {
+const FormDialogaddAlimentacao = ({ id }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -59,7 +59,7 @@ const FormDialogaddAlimentacao = () => {
           <DialogContentText>
             Complete o formulário para adicionar um Familiar
           </DialogContentText>
-          <AlimentacaoForm />
+          <AlimentacaoForm handleClose={handleClose} id={id} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
