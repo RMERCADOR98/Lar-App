@@ -9,14 +9,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AlimentacaoMap = ({ alimentacao }) => {
+const AlimentacaoMap = ({ alimentacao, id, deleteAlimentacao }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       {alimentacao &&
         alimentacao.map((alimento) => {
-          return <AlimentacaoUtente alimento={alimento} />;
+          return (
+            <div key={alimentacao.id}>
+              <AlimentacaoUtente
+                alimento={alimento}
+                id={id}
+                deleteAlimentacao={deleteAlimentacao}
+              />
+              ;
+            </div>
+          );
         })}
     </div>
   );

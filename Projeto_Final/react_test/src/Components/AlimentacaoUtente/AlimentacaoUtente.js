@@ -48,14 +48,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AlimentacaoUtente = ({ refeicoes, deleteRefeicao, alimento }) => {
+const AlimentacaoUtente = ({
+  refeicoes,
+  deleteRefeicao,
+  alimento,
+  id,
+  Uid,
+  deleteAlimentacao,
+}) => {
   const classes = useStyles();
 
   // const USERid = utente.alimentacao.id;
-  console.log(alimento.id);
+
   // console.log(USERid);
 
-  const alimentoId = alimento.id;
+  // const alimentoId = alimento.id;
+  // const Uid = id;
+  console.log(alimento.id);
+  console.log(Uid);
 
   return (
     <Grid item xs={12} className={classes.expansionPanel}>
@@ -97,7 +107,8 @@ const AlimentacaoUtente = ({ refeicoes, deleteRefeicao, alimento }) => {
               color="secondary"
               aria-label="edit"
               onClick={() => {
-                deleteAlimentacao(alimentoId);
+                deleteAlimentacao(alimento.id);
+                console.log(alimento.id); //id da alimentação diária
               }}
               className={classes.fab}
             >
@@ -111,6 +122,21 @@ const AlimentacaoUtente = ({ refeicoes, deleteRefeicao, alimento }) => {
   );
 };
 
+const mapStateToProps = (state, ownProps) => {
+  const Uid = ownProps.id; //id do utente
+  console.log(ownProps);
+  console.log(state.firestore.data);
+
+  // const alimentos = state.firestore.data.utentes;
+  // const utente = utentes ? utentes[Uid] : null;
+
+  return {
+    // utente: utente,
+    Uid: Uid,
+    auth: state.firebase.auth,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteAlimentacao: (alimentoId) => dispatch(deleteAlimentacao(alimentoId)),
@@ -118,13 +144,13 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default compose(
-  connect(mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect((props) => [
     {
       collection: "utentes",
       doc: props.id,
       subcollections: [{ collection: "alimentacao" }],
-      storeAs: "alimentos",
+      storeAs: "diaria",
     },
   ])
 )(AlimentacaoUtente);

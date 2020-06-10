@@ -49,6 +49,11 @@ class Alimentacao extends Component {
     });
   };
 
+  deleteAlimentacao(Aid) {
+    // console.log("Project to delete", id);
+    this.props.deleteAlimentacao(Aid);
+  }
+
   render() {
     const { auth, alimentacao, id } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
@@ -65,7 +70,11 @@ class Alimentacao extends Component {
           alimentacao={alimentacao}
         /> */}
 
-        <AlimentacaoMap alimentacao={alimentacao} id={id} />
+        <AlimentacaoMap
+          alimentacao={alimentacao}
+          id={id}
+          deleteAlimentacao={this.deleteAlimentacao}
+        />
         {/* <AddRefeicao addRefeicao={this.addRefeicao} /> */}
         <FormDialogaddAlimentacao id={id} />
       </div>

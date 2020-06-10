@@ -13,9 +13,9 @@ const alimentacaoReducer = (state = initState, action) => {
       return state;
 
     case "DELETE_ALIMENTACAO":
-      console.log("Alimentação Apagada!", action.alimentacao);
+      console.log("Alimentação Apagada!", action.alimento);
       return state;
-    case "DELETE_UTENTE_ERROR":
+    case "DELETE_ALIMENTACAO_ERROR":
       console.log("Erro ao apagar Alimentação", action.err);
       return state;
 

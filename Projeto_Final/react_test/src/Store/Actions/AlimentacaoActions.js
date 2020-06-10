@@ -29,13 +29,14 @@ export const deleteAlimentacao = (alimentoId) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     //make async call
     console.log(alimentoId);
+    // console.log(dispatch);
 
     const firestore = getFirestore();
 
     firestore
       .delete({
         collection: "utentes",
-        doc: "k61CkOi2eAXZ37pMvEic",
+        doc: "X1TxGG8eFV2jgUJUhN7Y",
         subcollections: [{ collection: "alimentacao", doc: alimentoId }],
       })
       .then(() => {

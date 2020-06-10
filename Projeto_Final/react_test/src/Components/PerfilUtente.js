@@ -215,8 +215,11 @@ const PerfilUtente = (props) => {
 
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.match.params.id;
+  console.log(id);
   const utentes = state.firestore.data.utentes;
+  console.log(utentes);
   const utente = utentes ? utentes[id] : null;
+  console.log(utente);
 
   return {
     utente: utente,
