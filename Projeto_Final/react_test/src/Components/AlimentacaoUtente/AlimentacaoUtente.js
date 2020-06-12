@@ -66,6 +66,7 @@ const AlimentacaoUtente = ({
   // const Uid = id;
   console.log(alimento.id);
   console.log(Uid);
+  const Utenteid = Uid;
 
   return (
     <Grid item xs={12} className={classes.expansionPanel}>
@@ -102,13 +103,14 @@ const AlimentacaoUtente = ({
               <br />
               <b>Jantar:</b> {alimento.jantar}
               <br />
+              <deleteAlimentacao Uid={Uid} />
             </p>
             <Fab
               color="secondary"
               aria-label="edit"
               onClick={() => {
-                deleteAlimentacao(alimento.id);
-                console.log(alimento.id); //id da alimentação diária
+                deleteAlimentacao(alimento.id, Uid);
+                console.log(Uid); //id da alimentação diária
               }}
               className={classes.fab}
             >
@@ -139,7 +141,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteAlimentacao: (alimentoId) => dispatch(deleteAlimentacao(alimentoId)),
+    deleteAlimentacao: (alimentacao, Uid) =>
+      dispatch(deleteAlimentacao(alimentacao, Uid)),
   };
 };
 

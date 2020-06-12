@@ -26,6 +26,21 @@ import storage from "redux-persist/lib/storage";
 
 import { PersistGate } from "redux-persist/integration/react";
 
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      "Nunito",
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+    ].join(","),
+  },
+});
+
 const persistConfig = {
   key: "root",
   storage,
@@ -69,7 +84,9 @@ ReactDOM.render(
     <PersistGate loading={null} persistor={persistor}>
       <ReactReduxFirebaseProvider {...rrfProps}>
         <AuthIsLoaded>
-          <App />
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
         </AuthIsLoaded>
       </ReactReduxFirebaseProvider>
     </PersistGate>

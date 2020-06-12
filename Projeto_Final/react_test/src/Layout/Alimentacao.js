@@ -12,6 +12,8 @@ import { compose } from "redux";
 import AlimentacaoMap from "../Components/AlimentacaoUtente/AlimentacaoMap";
 import AlimentacaoTop from "../Components/AlimentacaoUtente/AlimentaçãoTop";
 
+import Uid from "../Components/AlimentacaoUtente/Uid";
+
 class Alimentacao extends Component {
   // state = {
   //   refeicoes: [
@@ -32,32 +34,31 @@ class Alimentacao extends Component {
   //   ],
   // };
 
-  addRefeicao = (refeicao) => {
-    refeicao.id = Math.random();
-    let refeicoes = [...this.state.refeicoes, refeicao];
-    this.setState({
-      refeicoes: refeicoes,
-    });
-  };
+  // addRefeicao = (refeicao) => {
+  //   refeicao.id = Math.random();
+  //   let refeicoes = [...this.state.refeicoes, refeicao];
+  //   this.setState({
+  //     refeicoes: refeicoes,
+  //   });
+  // };
 
-  deleteRefeicao = (id) => {
-    let refeicoes = this.state.refeicoes.filter((refeicao) => {
-      return refeicao.id !== id;
-    });
-    this.setState({
-      refeicoes: refeicoes,
-    });
-  };
+  // deleteRefeicao = (id) => {
+  //   let refeicoes = this.state.refeicoes.filter((refeicao) => {
+  //     return refeicao.id !== id;
+  //   });
+  //   this.setState({
+  //     refeicoes: refeicoes,
+  //   });
+  // };
 
-  deleteAlimentacao(Aid) {
-    // console.log("Project to delete", id);
-    this.props.deleteAlimentacao(Aid);
+  deleteAlimentacao(Aid, Uid) {
+    this.props.deleteAlimentacao(Aid, Uid);
   }
 
   render() {
     const { auth, alimentacao, id } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
-    console.log(id);
+    console.log(this.props.id);
     return (
       <div>
         <h1> Todos as refeicoes</h1>
@@ -76,6 +77,7 @@ class Alimentacao extends Component {
           deleteAlimentacao={this.deleteAlimentacao}
         />
         {/* <AddRefeicao addRefeicao={this.addRefeicao} /> */}
+        <Uid id={id} />
         <FormDialogaddAlimentacao id={id} />
       </div>
     );
@@ -106,3 +108,9 @@ export default compose(
     },
   ])
 )(Alimentacao);
+
+export const Oid = (id) => {
+  return () => {
+    this.props.id(id);
+  };
+};

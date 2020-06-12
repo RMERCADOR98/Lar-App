@@ -1,3 +1,5 @@
+// import Uid from "../../Components/AlimentacaoUtente/Uid";
+
 export const createAlimentacao = (alimentacao) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     //make async call to database
@@ -25,22 +27,22 @@ export const createAlimentacao = (alimentacao) => {
   };
 };
 
-export const deleteAlimentacao = (alimentoId) => {
+export const deleteAlimentacao = (alimentacao, Uid) => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     //make async call
-    console.log(alimentoId);
-    // console.log(dispatch);
+    console.log(alimentacao);
+    console.log(Uid);
 
     const firestore = getFirestore();
 
     firestore
       .delete({
         collection: "utentes",
-        doc: "X1TxGG8eFV2jgUJUhN7Y",
-        subcollections: [{ collection: "alimentacao", doc: alimentoId }],
+        doc: Uid,
+        subcollections: [{ collection: "alimentacao", doc: alimentacao }],
       })
       .then(() => {
-        dispatch({ type: "DELETE_ALIMENTACAO", alimentoId });
+        dispatch({ type: "DELETE_ALIMENTACAO", alimentacao });
       })
       .catch((err) => {
         dispatch({ type: "DELETE_ALIMENTACAO_ERROR", err });
