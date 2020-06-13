@@ -73,13 +73,6 @@ const PerfilUtente = (props) => {
           {/* <BadgePerfilUtente> */}
 
           <Card>
-            <CardHeader
-              avatar={
-                <Avatar aria-label="recipe" className={classes.avatar}>
-                  voltar
-                </Avatar>
-              }
-            />
             <Grid
               container
               fluid
@@ -88,6 +81,13 @@ const PerfilUtente = (props) => {
                 alignItems: "center",
               }}
             >
+              <CardHeader
+                avatar={
+                  <Avatar aria-label="recipe" className={classes.avatar}>
+                    voltar
+                  </Avatar>
+                }
+              />
               <Grid item xs={12} md={5}>
                 <ImageAvatars />
               </Grid>
