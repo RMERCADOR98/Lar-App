@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FormDialogaddBemEstar = () => {
+const FormDialogaddBemEstar = ({ id }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -58,7 +58,7 @@ const FormDialogaddBemEstar = () => {
           <DialogContentText>
             Complete o formulário para adicionar um Familiar
           </DialogContentText>
-          <BemEstarForm handleClose={handleClose} />
+          <BemEstarForm handleClose={handleClose} id={id} />
         </DialogContent>
       </Dialog>
     </div>

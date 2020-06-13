@@ -5,6 +5,7 @@ export const createAlimentacao = (alimentacao) => {
     //make async call to database
     const firestore = getFirestore();
     const Uid = alimentacao.Id;
+    console.log(alimentacao);
     console.log(Uid);
     firestore
       .collection("utentes")

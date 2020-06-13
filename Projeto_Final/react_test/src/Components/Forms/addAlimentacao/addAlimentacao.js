@@ -61,14 +61,6 @@ const FormDialogaddAlimentacao = ({ id }) => {
           </DialogContentText>
           <AlimentacaoForm handleClose={handleClose} id={id} />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );

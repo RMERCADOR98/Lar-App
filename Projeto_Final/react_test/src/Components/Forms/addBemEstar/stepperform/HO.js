@@ -65,6 +65,7 @@ class HO extends Component {
         </FormControl>
         <br />
         <br />
+        <h4>observacoes</h4>
         <TextareaAutosize
           aria-label="minimum height"
           rowsMin={3}

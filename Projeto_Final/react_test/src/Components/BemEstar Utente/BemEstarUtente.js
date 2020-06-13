@@ -10,6 +10,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+import { connect } from "react-redux"; //conecta o component com o redux
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+import { deleteBemEstar } from "../../Store/Actions/BemEstarActions";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -43,78 +48,99 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BemEstarUtente = ({ bes, deleteBE }) => {
+const BemEstarUtente = ({ bemEsta, id, Uid, deleteBemEstar }) => {
   const classes = useStyles();
-  const listabes = bes.map((be) => {
-    return (
-      <Grid item xs={12} key={be.id} className={classes.expansionPanel}>
-        <ExpansionPanel>
-          <ExpansionPanelSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Grid container fluid="true" justify="center">
-              <Grid item xs={4}>
-                <Typography className={classes.heading}>{be.id}</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography className={classes.heading}>{be.id}</Typography>
-              </Grid>
-              <Grid item xs={4}>
-                <Typography className={classes.heading}>{be.id}</Typography>
-              </Grid>
-            </Grid>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails style={{ background: "lightGrey" }}>
-            <Typography>
-              <p>
-                <br />
-                <b>medicacao:</b> {be.medicacao}
-                <br />
-                <br />
-                <b>Banho:</b> {be.banho}
-                <br />
-                <br />
-                <b>Humor:</b> {be.humor}
-                <br />
-                <br />
-                <b>Observacoes:</b> {be.observacoes}
-                <br />
-              </p>
-              <Fab
-                color="secondary"
-                aria-label="edit"
-                onClick={() => {
-                  deleteBE(be.id);
-                }}
-                className={classes.fab}
-              >
-                <DeleteIcon />
-              </Fab>
-            </Typography>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <br />
-      </Grid>
-    );
-  });
+
+  console.log(bemEsta.id);
+  console.log(Uid);
+  const Utenteid = Uid;
 
   return (
-    <div className={classes.root}>
-      <ExpansionPanel disabled>
+    <Grid item xs={12} className={classes.expansionPanel}>
+      <ExpansionPanel>
         <ExpansionPanelSummary
-          aria-controls="panel3a-content"
-          id="panel3a-header"
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
         >
-          <Typography className={classes.heading}>Data</Typography>
+          <Grid container fluid="true" justify="center" align="center">
+            <Grid item xs={4}>
+              <Typography className={classes.heading}>cenas</Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography className={classes.heading}>cenas</Typography>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography className={classes.heading}>cenas</Typography>
+            </Grid>
+          </Grid>
         </ExpansionPanelSummary>
+        <ExpansionPanelDetails style={{ background: "lightGrey" }}>
+          <Typography>
+            <p>
+              <br />
+              <b>Pequeno Almoço:</b> {bemEsta.medicacao}
+              <br />
+              <br />
+              <b>Almoço:</b> {bemEsta.banho}
+              <br />
+              <br />
+              <b>Lanche:</b> {bemEsta.humor}
+              <br />
+              <br />
+              <b>Jantar:</b> {bemEsta.observacoes}
+              <br />
+              <deleteAlimentacao Uid={Uid} />
+            </p>
+            <Fab
+              color="secondary"
+              aria-label="edit"
+              onClick={() => {
+                deleteBemEstar(bemEsta.id, Uid);
+                console.log(Uid); //id da alimentação diária
+              }}
+              className={classes.fab}
+            >
+              <DeleteIcon />
+            </Fab>
+          </Typography>
+        </ExpansionPanelDetails>
       </ExpansionPanel>
-      <Grid container fluid="true" justify="center">
-        {listabes}
-      </Grid>
-    </div>
+      <br />
+    </Grid>
   );
 };
 
-export default BemEstarUtente;
+const mapStateToProps = (state, ownProps) => {
+  const Uid = ownProps.id; //id do utente
+  console.log(ownProps);
+  console.log(Uid);
+  console.log(state.firestore.data);
+
+  // const alimentos = state.firestore.data.utentes;
+  // const utente = utentes ? utentes[Uid] : null;
+
+  return {
+    // utente: utente,
+    Uid: Uid,
+    auth: state.firebase.auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteBemEstar: (bemEstar, Uid) => dispatch(deleteBemEstar(bemEstar, Uid)),
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect((props) => [
+    {
+      collection: "utentes",
+      doc: props.id,
+      subcollections: [{ collection: "bemEstar" }],
+      storeAs: "bemEstar",
+    },
+  ])
+)(BemEstarUtente);

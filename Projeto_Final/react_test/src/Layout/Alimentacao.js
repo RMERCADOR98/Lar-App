@@ -77,7 +77,7 @@ class Alimentacao extends Component {
           deleteAlimentacao={this.deleteAlimentacao}
         />
         {/* <AddRefeicao addRefeicao={this.addRefeicao} /> */}
-        <Uid id={id} />
+        {/* <Uid id={id} /> */}
         <FormDialogaddAlimentacao id={id} />
       </div>
     );
@@ -109,8 +109,8 @@ export default compose(
   ])
 )(Alimentacao);
 
-export const Oid = (id) => {
-  return () => {
-    this.props.id(id);
-  };
-};
+// export const Oid = (id) => {
+//   return () => {
+//     this.props.id(id);
+//   };
+// };

@@ -157,7 +157,10 @@ const PerfilUtente = (props) => {
                 </Link>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Link to={"/Bem-Estar"} style={{ textDecoration: "none" }}>
+                <Link
+                  to={"/Bem-Estar/" + utenteId}
+                  style={{ textDecoration: "none" }}
+                >
                   <Button
                     variant="contained"
                     style={{

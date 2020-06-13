@@ -4,9 +4,13 @@ import Sucess from "./Sucess";
 import MB from "./MB";
 import HO from "./HO";
 
-export default class BemEstarForm extends Component {
+import { createBemEstar } from "../../../../Store/Actions/BemEstarActions";
+import { connect } from "react-redux"; //para que o component tenha acesso á redux store
+
+class BemEstarForm extends Component {
   state = {
     step: 1,
+    Id: this.props.id,
 
     medicacao: "",
 
@@ -60,7 +64,7 @@ export default class BemEstarForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // this.props.createUtente(this.state);
+    this.props.createBemEstar(this.state);
     this.props.handleClose();
   };
 
@@ -118,3 +122,11 @@ export default class BemEstarForm extends Component {
     }
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createBemEstar: (bemEstar) => dispatch(createBemEstar(bemEstar)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(BemEstarForm);
