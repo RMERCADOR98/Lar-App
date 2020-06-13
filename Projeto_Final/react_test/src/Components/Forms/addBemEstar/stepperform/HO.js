@@ -11,6 +11,8 @@ import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissa
 import SentimentSatisfiedIcon from "@material-ui/icons/SentimentSatisfied";
 import SentimentVerySatisfiedIcon from "@material-ui/icons/SentimentVerySatisfied";
 
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
 class HO extends Component {
   continue = (e) => {
     e.preventDefault();
@@ -23,7 +25,7 @@ class HO extends Component {
   };
 
   render() {
-    const { values, handleChange } = this.props;
+    const { values, handleChange, handleChangeRadioHumor } = this.props;
 
     const styles = {
       button: {
@@ -35,56 +37,38 @@ class HO extends Component {
       <Fragment>
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            <h4>Humor</h4>
+            <h4>Medicação</h4>
           </FormLabel>
-          <FormGroup aria-label="position" row>
+          <RadioGroup
+            aria-label="position"
+            row
+            name="medicacao"
+            value={values.humor}
+            onChange={(e) => handleChangeRadioHumor(e)}
+          >
             <FormControlLabel
-              value="bottom"
-              control={
-                <Checkbox
-                  icon={<SentimentVerySatisfiedIcon />}
-                  color="primary"
-                  onChange={handleChange("humor")}
-                  defaultValue={values.humor}
-                />
-              }
-              label="Alegre"
-              labelPlacement="bottom"
-            />
-            <FormControlLabel
-              value="bottom"
-              control={
-                <Checkbox
-                  icon={<SentimentSatisfiedIcon />}
-                  color="primary"
-                  onChange={handleChange("humor")}
-                  defaultValue={values.humor}
-                />
-              }
-              label="Normal"
-              labelPlacement="bottom"
-            />
-            <FormControlLabel
-              value="bottom"
-              control={
-                <Checkbox
-                  icon={<SentimentVeryDissatisfiedIcon />}
-                  color="primary"
-                  onChange={handleChange("humor")}
-                  defaultValue={values.humor}
-                />
-              }
+              value="Triste"
+              control={<Radio />}
               label="Triste"
-              labelPlacement="bottom"
             />
-          </FormGroup>
+            <FormControlLabel
+              value="Normal"
+              control={<Radio />}
+              label="Normal"
+            />
+            <FormControlLabel
+              value="Contente"
+              control={<Radio />}
+              label="Contente"
+            />
+          </RadioGroup>
         </FormControl>
         <br />
         <br />
         <TextareaAutosize
           aria-label="minimum height"
           rowsMin={3}
-          Placeholder="Adicone alguma observação"
+          placeholder="Adicone alguma observação"
           onChange={handleChange("observacoes")}
           defaultValue={values.observacoes}
         />
@@ -105,7 +89,7 @@ class HO extends Component {
           onClick={this.continue}
           className={styles.button}
         >
-          Continue
+          Continuar
         </Button>
       </Fragment>
     );

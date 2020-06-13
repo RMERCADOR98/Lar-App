@@ -9,6 +9,7 @@ export default class BemEstarForm extends Component {
     step: 1,
 
     medicacao: "",
+
     banho: "",
 
     humor: "",
@@ -40,6 +41,29 @@ export default class BemEstarForm extends Component {
     });
   };
 
+  handleChangeRadio = (e) => {
+    this.setState({
+      medicacao: e.target.value,
+    });
+  };
+
+  handleChangeRadioBanho = (e) => {
+    this.setState({
+      banho: e.target.value,
+    });
+  };
+  handleChangeRadioHumor = (e) => {
+    this.setState({
+      humor: e.target.value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    // this.props.createUtente(this.state);
+    this.props.handleClose();
+  };
+
   render() {
     const { step } = this.state;
     const {
@@ -63,6 +87,9 @@ export default class BemEstarForm extends Component {
           <MB
             nextStep={this.nextStep}
             handleChange={this.handleChange}
+            // handleChangeCheck={this.handleChangeCheck}
+            handleChangeRadio={this.handleChangeRadio}
+            handleChangeRadioBanho={this.handleChangeRadioBanho}
             values={values}
           />
         );
@@ -72,6 +99,7 @@ export default class BemEstarForm extends Component {
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
+            handleChangeRadioHumor={this.handleChangeRadioHumor}
             values={values}
           />
         );
@@ -82,10 +110,10 @@ export default class BemEstarForm extends Component {
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             values={values}
+            handleSubmit={this.handleSubmit}
           />
         );
-      case 4:
-        return <Sucess />;
+
       default:
     }
   }

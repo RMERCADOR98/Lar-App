@@ -58,16 +58,8 @@ const FormDialogaddBemEstar = () => {
           <DialogContentText>
             Complete o formulário para adicionar um Familiar
           </DialogContentText>
-          <BemEstarForm />
+          <BemEstarForm handleClose={handleClose} />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );

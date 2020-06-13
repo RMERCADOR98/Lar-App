@@ -28,9 +28,9 @@ class Confirm extends Component {
     return (
       <Fragment>
         <List>
-          <ListItemText primary="Pequeno Almoço" secondary={medicacao} />
-          <ListItemText primary="Almoço" secondary={banho} />
-          <ListItemText primary="Jantar" secondary={humor} />
+          <ListItemText primary="Medicação" secondary={medicacao} />
+          <ListItemText primary="Banho" secondary={banho} />
+          <ListItemText primary="Humor" secondary={humor} />
           <ListItemText primary="Observações" secondary={observacoes} />
         </List>
         <Button
@@ -45,10 +45,10 @@ class Confirm extends Component {
         <Button
           variant="contained"
           color="primary"
-          onClick={this.continue}
+          onClick={this.props.handleSubmit}
           className={styles.button}
         >
-          Continue
+          Confirmar
         </Button>
       </Fragment>
     );

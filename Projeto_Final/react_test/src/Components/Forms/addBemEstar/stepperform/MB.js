@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from "react";
 import Button from "@material-ui/core/Button";
 
-import Checkbox from "@material-ui/core/Checkbox";
-import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
 
 class MB extends Component {
   continue = (e) => {
@@ -14,7 +15,7 @@ class MB extends Component {
   };
 
   render() {
-    const { values, handleChange } = this.props;
+    const { values, handleChangeRadio, handleChangeRadioBanho } = this.props;
 
     const styles = {
       button: {
@@ -28,32 +29,24 @@ class MB extends Component {
           <FormLabel component="legend">
             <h4>Medicação</h4>
           </FormLabel>
-          <FormGroup aria-label="position" row>
+          <RadioGroup
+            aria-label="position"
+            row
+            name="medicacao"
+            value={values.medicacao}
+            onChange={(e) => handleChangeRadio(e)}
+          >
             <FormControlLabel
-              value="bottom"
-              control={
-                <Checkbox
-                  color="primary"
-                  onChange={handleChange("medicacao")}
-                  defaultValue={values.medicacao}
-                />
-              }
+              value="Completa"
+              control={<Radio />}
               label="Completa"
-              labelPlacement="bottom"
             />
             <FormControlLabel
-              value="bottom"
-              control={
-                <Checkbox
-                  color="primary"
-                  onChange={handleChange("medicacao")}
-                  defaultValue={values.medicacao}
-                />
-              }
+              value="Parcial"
+              control={<Radio />}
               label="Parcial"
-              labelPlacement="bottom"
             />
-          </FormGroup>
+          </RadioGroup>
         </FormControl>
 
         <br />
@@ -62,33 +55,26 @@ class MB extends Component {
           <FormLabel component="legend">
             <h4>Banho</h4>
           </FormLabel>
-          <FormGroup aria-label="position" row>
+          <RadioGroup
+            aria-label="position"
+            row
+            name="banho"
+            value={values.banho}
+            onChange={(e) => handleChangeRadioBanho(e)}
+          >
             <FormControlLabel
-              value="bottom"
-              control={
-                <Checkbox
-                  color="primary"
-                  onChange={handleChange("banho")}
-                  defaultValue={values.banho}
-                />
-              }
-              label="Tomou"
-              labelPlacement="bottom"
+              value="Completa"
+              control={<Radio />}
+              label="Completa"
             />
             <FormControlLabel
-              value="bottom"
-              control={
-                <Checkbox
-                  color="primary"
-                  onChange={handleChange("banho")}
-                  defaultValue={values.banho}
-                />
-              }
-              label="Não Tomou"
-              labelPlacement="bottom"
+              value="Parcial"
+              control={<Radio />}
+              label="Parcial"
             />
-          </FormGroup>
+          </RadioGroup>
         </FormControl>
+
         <br />
         <br />
 
@@ -98,7 +84,7 @@ class MB extends Component {
           onClick={this.continue}
           className={styles.button}
         >
-          Continue
+          Continuar
         </Button>
       </Fragment>
     );
