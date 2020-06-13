@@ -4,7 +4,13 @@ import Card from "@material-ui/core/Card";
 import Container from "@material-ui/core/Container";
 import ImageAvatars from "./Perfil Utente/perfilUtente";
 import Button from "@material-ui/core/Button";
-import { Grid } from "@material-ui/core";
+import {
+  Grid,
+  CardHeader,
+  Avatar,
+  IconButton,
+  MoreVertIcon,
+} from "@material-ui/core";
 import { Link } from "react-router-dom";
 import BotaoFamiliar from "./Perfil Utente/BotaoFamiliar";
 
@@ -48,8 +54,9 @@ const PerfilUtente = (props) => {
   let utenteId = props.match.params.id;
 
   console.log(utenteId);
+  console.log(utente);
 
-  console.log(url);
+  console.log(props.match.params);
 
   const classes = useStyles();
   if (!auth.uid) return <Redirect to="/signin" />;
@@ -66,6 +73,13 @@ const PerfilUtente = (props) => {
           {/* <BadgePerfilUtente> */}
 
           <Card>
+            <CardHeader
+              avatar={
+                <Avatar aria-label="recipe" className={classes.avatar}>
+                  voltar
+                </Avatar>
+              }
+            />
             <Grid
               container
               fluid
@@ -74,12 +88,13 @@ const PerfilUtente = (props) => {
                 alignItems: "center",
               }}
             >
-              <Grid item lg={4}>
+              <Grid item xs={12} md={5}>
                 <ImageAvatars />
               </Grid>
               <Grid
                 item
-                lg={4}
+                xl={4}
+                sm={6}
                 style={{
                   flex: 1,
                   textAlign: "justify",
@@ -87,7 +102,7 @@ const PerfilUtente = (props) => {
                 }}
               >
                 <span>
-                  <b>Nome:</b> {utente.nome}
+                  <b>Nome:</b> {utente.nomeCompleto}
                 </span>
                 <br />
                 <span>
@@ -98,12 +113,15 @@ const PerfilUtente = (props) => {
                 </span>
                 <br />
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={6} md={4} xl={4}>
                 <BotaoFamiliar />
               </Grid>
             </Grid>
+
+            {/* parte de baixo */}
+
             <Grid container fluid spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={6} sm={6}>
                 <Link
                   exact
                   to={"/Alimentação/" + utenteId}
@@ -122,7 +140,7 @@ const PerfilUtente = (props) => {
                   </Button>
                 </Link>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={6} sm={6}>
                 <Link
                   to={"/Informações/" + utenteId}
                   style={{ textDecoration: "none" }}
@@ -140,8 +158,11 @@ const PerfilUtente = (props) => {
                   </Button>
                 </Link>
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <Link to={"/Saúde"} style={{ textDecoration: "none" }}>
+              <Grid item xs={6} sm={6}>
+                <Link
+                  to={"/Saúde/" + utenteId}
+                  style={{ textDecoration: "none" }}
+                >
                   <Button
                     variant="contained"
                     style={{
@@ -156,7 +177,7 @@ const PerfilUtente = (props) => {
                   </Button>
                 </Link>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={6} sm={6}>
                 <Link
                   to={"/Bem-Estar/" + utenteId}
                   style={{ textDecoration: "none" }}

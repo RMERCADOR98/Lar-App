@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+
   gridPaper: {
     margin: theme.spacing(1),
     padding: theme.spacing(2),
@@ -64,14 +65,27 @@ const BemEstarUtente = ({ bemEsta, id, Uid, deleteBemEstar }) => {
           id="panel1a-header"
         >
           <Grid container fluid="true" justify="center" align="center">
-            <Grid item xs={4}>
-              <Typography className={classes.heading}>cenas</Typography>
+            <Grid item xs={3}>
+              <Typography className={classes.heading}>
+                {new Date(bemEsta.createdAt.seconds * 1000).toLocaleDateString(
+                  "pt-PT"
+                )}
+              </Typography>
             </Grid>
-            <Grid item xs={4}>
-              <Typography className={classes.heading}>cenas</Typography>
+            <Grid item xs={3}>
+              <Typography className={classes.heading}>
+                {bemEsta.medicacao}
+              </Typography>
             </Grid>
-            <Grid item xs={4}>
-              <Typography className={classes.heading}>cenas</Typography>
+            <Grid item xs={3}>
+              <Typography className={classes.heading}>
+                {bemEsta.banho}
+              </Typography>
+            </Grid>
+            <Grid item xs={3}>
+              <Typography className={classes.heading}>
+                {bemEsta.humor}
+              </Typography>
             </Grid>
           </Grid>
         </ExpansionPanelSummary>
@@ -79,16 +93,7 @@ const BemEstarUtente = ({ bemEsta, id, Uid, deleteBemEstar }) => {
           <Typography>
             <p>
               <br />
-              <b>Pequeno Almoço:</b> {bemEsta.medicacao}
-              <br />
-              <br />
-              <b>Almoço:</b> {bemEsta.banho}
-              <br />
-              <br />
-              <b>Lanche:</b> {bemEsta.humor}
-              <br />
-              <br />
-              <b>Jantar:</b> {bemEsta.observacoes}
+              <b>Observações:</b> {bemEsta.observacoes}
               <br />
               <deleteAlimentacao Uid={Uid} />
             </p>

@@ -10,6 +10,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 
 import BemEstarMapMap from "../Components/BemEstar Utente/BemEstarMap";
+import BemEstarTop from "../Components/BemEstar Utente/BemEstarTop";
 
 class BemEstar extends Component {
   // state = {
@@ -61,11 +62,11 @@ class BemEstar extends Component {
         <h1> Bem Estar</h1>
 
         {/* <BemEstarUtente bes={this.state.bes} deleteBE={this.deleteBE} /> */}
-
+        <BemEstarTop />
         <BemEstarMapMap
           bemEstar={bemEstar}
           id={id}
-          // deleteAlimentacao={this.deleteAlimentacao}
+          deleteBemEstar={this.deleteBemEstar}
         />
 
         {/* <AddBemEstar addBE={this.addBE} /> */}

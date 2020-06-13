@@ -37,7 +37,7 @@ class App extends Component {
               <Route exact path="/" component={Utentes} />
               <Route exact path="/Utente/:id" component={PerfilUtente} />
               <Route exact path="/Alimentação/:id" component={Alimentacao} />
-              <Route exact path="/Saúde" component={Saude} />
+              <Route exact path="/Saúde/:id" component={Saude} />
               <Route exact path="/Informações/:id" component={Info} />
               <Route exact path="/Bem-Estar/:id" component={BemEstar} />
               <Route exact path="/Familiares" component={Familiares} />
