@@ -22,6 +22,7 @@ class Info extends Component {
 
   render() {
     const { auth, utentes, id } = this.props;
+    console.log(utentes);
 
     if (!auth.uid) return <Redirect to="/signin" />;
     return (
@@ -52,7 +53,6 @@ export default compose(
     {
       collection: "utentes",
       doc: props.id,
-      subcollections: [{ collection: "informações" }],
     },
   ])
 )(Info);

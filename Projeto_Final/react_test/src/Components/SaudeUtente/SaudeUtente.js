@@ -18,27 +18,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SaudeUtente = ({ saudes }) => {
+const SaudeUtente = ({ saude }) => {
   const classes = useStyles();
+
   return (
     <Paper className={classes.gridPaper} justify="center">
       <p>
-        <b>Grupo Sanguineo:</b> {saudes.grupoSanguineo}
+        <b>Grupo Sanguineo:</b> {saude.grupoSanguineo}
         <br />
         <br />
-        <b>Doenças:</b> {saudes.doencas}
+        <b>Doenças:</b> {saude.doencas}
         <br />
         <br />
-        <b>Alergias:</b> {saudes.alergias}
+        <b>Alergias:</b> {saude.alergias}
         <br />
         <br />
-        <b>Centro de Saúde:</b> {saudes.centroSaude}
+        <b>Centro de Saúde:</b> {saude.centroSaude}
         <br />
         <br />
-        <b>Contacto do Centro de Saúde:</b> {saudes.contactoCentroSaude}
+        <b>Contacto do Centro de Saúde:</b> {saude.contactoCentroSaude}
         <br />
         <br />
-        <b>Médico:</b> {saudes.medico}
+        <b>Médico:</b> {saude.medico}
         <br />
       </p>
     </Paper>

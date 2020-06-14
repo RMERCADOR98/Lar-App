@@ -7,14 +7,21 @@ import NNN from "./NNN";
 import GDA from "./GDA";
 import CCM from "./CCM";
 
+import firebase from "../../../../Config/fbConfig";
+
 import { createUtente } from "../../../../Store/Actions/UtenteActions";
 import { connect } from "react-redux"; //para que o component tenha acesso á redux store
 
 export class UserForm extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.ref = firebase.firestore.collection("utentes");
+  // }
   state = {
     step: 1,
 
     foto: "",
+    url: "",
     nomeCompleto: "",
     alcunha: "",
 
@@ -37,7 +44,11 @@ export class UserForm extends Component {
     centroSaude: "",
     contactoCentroSaude: "",
     medico: "",
+
+    // ref: this.props.utentes,
   };
+
+  // ref = firebase.firestore();
 
   //proced to the next step
 
@@ -71,6 +82,19 @@ export class UserForm extends Component {
     });
   };
 
+  onChangeComp = (childData) => {
+    this.setState({ url: childData });
+    console.log("passei aqui");
+  };
+
+  handleSubmitFoto = (e) => {
+    e.preventDefault();
+
+    this.setState({
+      url: this.state.url,
+    });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.createUtente(this.state);
@@ -82,6 +106,7 @@ export class UserForm extends Component {
     const { step } = this.state;
     const {
       foto,
+      url,
       nomeCompleto,
       alcunha,
 
@@ -107,6 +132,7 @@ export class UserForm extends Component {
     } = this.state;
     const values = {
       foto,
+      url,
       nomeCompleto,
       alcunha,
 
@@ -131,6 +157,8 @@ export class UserForm extends Component {
       medico,
     };
 
+    console.log(this.state.url);
+
     switch (step) {
       case 1:
         return (
@@ -138,6 +166,10 @@ export class UserForm extends Component {
             nextStep={this.nextStep}
             handleChange={this.handleChange}
             values={values}
+            handleChangeFoto={this.handleChangeFoto}
+            handleUpload={this.handleUpload}
+            handleSubmitFoto={this.handleSubmitFoto}
+            onChangeComp={this.onChangeComp}
           />
         );
       case 2:
@@ -201,10 +233,23 @@ export class UserForm extends Component {
     }
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  // const id = ownProps.match.params.id;
+  // const ref = state.firestore.ordered.utentes;
+  console.log(state.firestore.ordered.utentes);
+  return {
+    // id: id,
+    // ref: ref,
+    utentes: state.firestore.ordered.utentes,
+    auth: state.firebase.auth,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     createUtente: (utente) => dispatch(createUtente(utente)),
   };
 };
 
-export default connect(null, mapDispatchToProps)(UserForm);
+export default connect(mapStateToProps, mapDispatchToProps)(UserForm);

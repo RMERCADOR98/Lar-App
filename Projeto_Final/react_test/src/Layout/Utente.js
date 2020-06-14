@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, makeStyles, Grid } from "@material-ui/core";
+import { Avatar, makeStyles, Grid, Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,20 +29,14 @@ const Utente = ({ utente }) => {
 
   return (
     <Grid item xs={12} key={utente.id}>
-      <div className={classes.gridPaper} justify="center">
-        <Avatar
-          variant="circle"
-          className={classes.large}
-          src={process.env.PUBLIC_URL + "img/oldLady.jpg"}
-        />
-        <p>
-          <b>{utente.alcunha}</b>
-          <br />
-          Idade: {idade}
-          <br />
-          Estado civil: {utente.estadoCivil}
-          <br />
-        </p>
+      <div justify="center">
+        <Paper className={classes.gridPaper}>
+          <Avatar variant="circle" className={classes.large} src={utente.url} />
+          <p>
+            <b>{utente.alcunha}</b>
+            <br />
+          </p>
+        </Paper>
       </div>
     </Grid>
   );

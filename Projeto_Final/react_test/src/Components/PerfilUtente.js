@@ -10,6 +10,7 @@ import {
   Avatar,
   IconButton,
   MoreVertIcon,
+  Fab,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import BotaoFamiliar from "./Perfil Utente/BotaoFamiliar";
@@ -26,6 +27,8 @@ import {
   Redirect,
 } from "react-router-dom";
 
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+
 import BadgePerfilUtente from "./Badges/BadgePerfilUtente";
 
 import Info from "../Layout/Info";
@@ -40,6 +43,10 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
+  },
+  large: {
+    width: theme.spacing(30),
+    height: theme.spacing(30),
   },
 }));
 
@@ -81,15 +88,34 @@ const PerfilUtente = (props) => {
                 alignItems: "center",
               }}
             >
-              <CardHeader
-                avatar={
-                  <Avatar aria-label="recipe" className={classes.avatar}>
-                    voltar
-                  </Avatar>
-                }
-              />
-              <Grid item xs={12} md={5}>
-                <ImageAvatars />
+              <Grid item xs={12}>
+                <CardHeader
+                  avatar={
+                    <Avatar aria-label="recipe" className={classes.avatar}>
+                      <Fab variant="contained" color="secondary">
+                        <ArrowBackIcon />
+                      </Fab>
+                    </Avatar>
+                  }
+                ></CardHeader>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                md={5}
+                style={{ justify: "center", alignItems: "center" }}
+              >
+                {/* <ImageAvatars /> */}
+                {/* <img src={utente.url} /> */}
+                <Avatar
+                  src={utente.url}
+                  className={classes.large}
+                  style={{
+                    margin: "0 auto",
+                    justify: "center",
+                    alignItems: "center",
+                  }}
+                />
               </Grid>
               <Grid
                 item

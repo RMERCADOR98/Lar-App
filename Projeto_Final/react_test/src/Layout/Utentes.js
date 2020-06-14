@@ -60,7 +60,7 @@ class Utentes extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
+  console.log(state.firebase.storage);
   return {
     utentes: state.firestore.ordered.utentes,
     auth: state.firebase.auth,

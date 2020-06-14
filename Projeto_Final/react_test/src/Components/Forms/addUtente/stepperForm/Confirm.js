@@ -16,6 +16,8 @@ class Confirm extends Component {
   render() {
     const {
       values: {
+        foto,
+        url,
         nomeCompleto,
         alcunha,
         nascimento,
@@ -36,7 +38,7 @@ class Confirm extends Component {
       },
     } = this.props;
 
-    console.log(this.props);
+    console.log(this.props.values.url);
 
     const styles = {
       button: {
@@ -47,6 +49,8 @@ class Confirm extends Component {
     return (
       <Fragment>
         <List>
+          <ListItemText primary="Foto" secondary={foto} />
+          <ListItemText primary="Url" secondary={url} />
           <ListItemText primary="Nome Completo" secondary={nomeCompleto} />
           <ListItemText primary="Alcunha" secondary={alcunha} />
           <ListItemText

@@ -1,6 +1,7 @@
 import firebase from "firebase/app"; //apenas algumas coisas essenciais da firebase
 import "firebase/firestore";
 import "firebase/auth";
+import "firebase/storage";
 
 var firebaseConfig = {
   apiKey: "AIzaSyC9-tfJR-pJr9H5OG81Nqd4nSJe-RsEyik",
@@ -12,6 +13,7 @@ var firebaseConfig = {
   appId: "1:707164907949:web:9da040deb2c85503739924",
 };
 // Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 firebase.firestore().settings({ timestampsInSnapshots: true });
 
