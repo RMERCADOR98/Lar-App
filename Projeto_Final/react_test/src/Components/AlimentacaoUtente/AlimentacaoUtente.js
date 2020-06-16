@@ -107,7 +107,7 @@ const AlimentacaoUtente = ({
             </p>
             <Fab
               color="secondary"
-              aria-label="edit"
+              aria-label="delete"
               onClick={() => {
                 deleteAlimentacao(alimento.id, Uid);
                 console.log(Uid); //id da alimentação diária

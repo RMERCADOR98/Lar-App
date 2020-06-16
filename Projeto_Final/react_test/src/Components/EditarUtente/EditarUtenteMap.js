@@ -1,9 +1,7 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
-import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-import InfoUtente from "./InfoUtente";
+import EditarUtenteUtente from "./EditarUtenteUtente";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,17 +9,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const InfoMap = ({ utentes, prop, bind }) => {
+const EditarUtenteMap = ({ utentes }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       {utentes &&
         utentes.map((utente) => {
-          return <InfoUtente utente={utente} prop={prop} bind={bind} />;
+          return (
+            <div key={utente.id}>
+              <EditarUtenteUtente utente={utente} />;
+            </div>
+          );
         })}
     </div>
   );
 };
 
-export default InfoMap;
+export default EditarUtenteMap;

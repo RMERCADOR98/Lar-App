@@ -4,21 +4,15 @@ import Card from "@material-ui/core/Card";
 import Container from "@material-ui/core/Container";
 import ImageAvatars from "./Perfil Utente/perfilUtente";
 import Button from "@material-ui/core/Button";
-import {
-  Grid,
-  CardHeader,
-  Avatar,
-  IconButton,
-  MoreVertIcon,
-  Fab,
-} from "@material-ui/core";
+import { Grid, CardHeader, Avatar, Fab } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import BotaoFamiliar from "./Perfil Utente/BotaoFamiliar";
-
+import EditIcon from "@material-ui/icons/Edit";
 import { connect } from "react-redux"; //conecta o component com o redux
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { deleteUtente } from "../Store/Actions/UtenteActions";
+import DeleteIcon from "@material-ui/icons/Delete";
 import EditarUtente from "./EditarUtente";
 import {
   BrowserRouter as Router,
@@ -28,10 +22,6 @@ import {
 } from "react-router-dom";
 
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-
-import BadgePerfilUtente from "./Badges/BadgePerfilUtente";
-
-import Info from "../Layout/Info";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +37,15 @@ const useStyles = makeStyles((theme) => ({
   large: {
     width: theme.spacing(30),
     height: theme.spacing(30),
+  },
+  voltar: {
+    margin: "0 auto",
+    width: theme.spacing(9),
+    height: theme.spacing(9),
+  },
+  arrow: {
+    width: theme.spacing(5),
+    height: theme.spacing(5),
   },
 }));
 
@@ -91,9 +90,31 @@ const PerfilUtente = (props) => {
               <Grid item xs={12}>
                 <CardHeader
                   avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                      <Fab variant="contained" color="secondary">
-                        <ArrowBackIcon />
+                    <Avatar aria-label="recipe" className={classes.voltar}>
+                      <Fab
+                        variant="contained"
+                        color="secondary"
+                        className={classes.voltar}
+                        onClick={() => {
+                          props.history.push("/");
+                        }}
+                      >
+                        <ArrowBackIcon className={classes.arrow} />
+                      </Fab>
+                    </Avatar>
+                  }
+                  action={
+                    <Avatar aria-label="recipe" className={classes.voltar}>
+                      <Fab
+                        variant="contained"
+                        color="secondary"
+                        className={classes.voltar}
+                        onClick={() => {
+                          deleteUtente(utenteId);
+                          props.history.push("/");
+                        }}
+                      >
+                        <DeleteIcon className={classes.arrow} />
                       </Fab>
                     </Avatar>
                   }
@@ -178,6 +199,7 @@ const PerfilUtente = (props) => {
                       height: 80,
                       marginRight: 25,
                       background: "white",
+                      elevation: "20",
                     }}
                   >
                     Informações
@@ -224,33 +246,28 @@ const PerfilUtente = (props) => {
                 </Link>
               </Grid>
             </Grid>
+
             <Router>
               <Route path="/editarUtente/:id" component={EditarUtente} />
 
-              <div key={utente.id}>
-                <NavLink
-                  to={"/editarUtente/" + utenteId}
-                  exact
-                  activeStyle={{ color: "green" }}
-                >
-                  {/* <EditarUtente utenteId={utenteId} /> */}
-                  HEre
-                </NavLink>
-              </div>
-              <br />
+              <NavLink
+                to={"/editarUtente/" + utenteId}
+                exact
+                activeStyle={{ color: "green" }}
+              >
+                <Avatar aria-label="recipe" className={classes.voltar}>
+                  <Fab
+                    variant="contained"
+                    color="secondary"
+                    className={classes.voltar}
+                  >
+                    <EditIcon />
+                  </Fab>
+                </Avatar>
+              </NavLink>
             </Router>
             <br />
-            <button
-              onClick={() => {
-                deleteUtente(utenteId);
-                props.history.push("/");
-              }}
-            >
-              Delete
-            </button>
           </Card>
-
-          {/* </BadgePerfilUtente> */}
         </Container>
       </div>
     );

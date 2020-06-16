@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 class NAP extends Component {
   continue = (e) => {
@@ -32,12 +33,18 @@ class NAP extends Component {
         <br />
         <TextField
           label="Altura"
+          InputProps={{
+            endAdornment: <InputAdornment position="end">Cm</InputAdornment>,
+          }}
           onChange={handleChange("altura")}
           defaultValue={values.altura}
         />
         <br />
         <TextField
           label="Peso"
+          InputProps={{
+            endAdornment: <InputAdornment position="end">Kg</InputAdornment>,
+          }}
           onChange={handleChange("peso")}
           defaultValue={values.peso}
         />
