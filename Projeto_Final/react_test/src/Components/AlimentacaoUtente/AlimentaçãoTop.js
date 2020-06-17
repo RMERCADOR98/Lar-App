@@ -32,7 +32,10 @@ const AlimentacaoTop = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <ExpansionPanel disabled>
+      <ExpansionPanel
+        disabled
+        style={{ marginRight: "12px", marginLeft: "12px" }}
+      >
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"

@@ -8,28 +8,14 @@ import { compose } from "redux";
 import SaudeUtenteMap from "../Components/SaudeUtente/SaudeUtenteMap";
 
 class Saude extends Component {
-  // state = {
-  //   saude: {
-  //     grupoSanguineo: "O",
-  //     doencas: "Diabetes Tipo 2",
-  //     alergias: "Amoxicilina",
-  //     centroSaude: "Centro de Saúde de Almalaguês",
-  //     contactoCentroSaude: "239******",
-  //     medico: "Carlos Gonçalves",
-  //     id: 1,
-  //   },
-  // };
-
   render() {
-    const { auth, saudes } = this.props;
+    const { auth, saudes, prop } = this.props;
 
     if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div>
-        <h1> Saúde</h1>
-
         {/* <SaudeUtente saudes={this.state.saude} /> */}
-        <SaudeUtenteMap saudes={saudes} />
+        <SaudeUtenteMap saudes={saudes} prop={prop} />
       </div>
     );
   }
@@ -38,10 +24,12 @@ class Saude extends Component {
 const mapStateToProps = (state, ownProps) => {
   console.log(state);
   const id = ownProps.match.params.id;
+  const prop = ownProps;
   return {
     id: id,
     saudes: state.firestore.ordered.utentes,
     auth: state.firebase.auth,
+    prop: prop,
   };
 };
 

@@ -16,8 +16,6 @@ const ProjectList = ({ utentes }) => {
   return (
     <div className={classes.root}>
       <Grid container fluid="true" justify="center" align="center">
-        {/* //tambem podemos fazer fora do return como nos outros tutoriais */}
-        {/* estamos a utilizar os && porque provavelmente não teriamos nenhuns projeto e então estamos a dizer que a partir do momento em que recebemos os projetos , queremos que eles sejam mapeados */}
         {utentes &&
           utentes.map((utente) => {
             return (

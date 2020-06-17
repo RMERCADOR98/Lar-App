@@ -41,22 +41,22 @@ const theme = createMuiTheme({
   },
 });
 
-// const persistConfig = {
-//   key: "root",
-//   storage,
-// };
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
-// const persistentReducer = persistReducer(persistConfig, rootReducer);
+const persistentReducer = persistReducer(persistConfig, rootReducer);
 
 const store = createStore(
-  rootReducer,
+  persistentReducer,
   compose(
     applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
     reduxFirestore(fbConfig, { attachAuthIsReady: true })
   )
 );
 
-// const persistor = persistStore(store);
+const persistor = persistStore(store);
 
 const rrfProps = {
   firebase,
@@ -81,15 +81,15 @@ function AuthIsLoaded({ children }) {
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* <PersistGate loading={null} persistor={persistor}> */}
-    <ReactReduxFirebaseProvider {...rrfProps}>
-      <AuthIsLoaded>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </AuthIsLoaded>
-    </ReactReduxFirebaseProvider>
-    {/* </PersistGate> */}
+    <PersistGate loading={null} persistor={persistor}>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <AuthIsLoaded>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </AuthIsLoaded>
+      </ReactReduxFirebaseProvider>
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

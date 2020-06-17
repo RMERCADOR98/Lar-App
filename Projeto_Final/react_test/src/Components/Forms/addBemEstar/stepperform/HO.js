@@ -37,12 +37,12 @@ class HO extends Component {
       <Fragment>
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            <h4>Medicação</h4>
+            <h4>Humor</h4>
           </FormLabel>
           <RadioGroup
             aria-label="position"
             row
-            name="medicacao"
+            name="humor"
             value={values.humor}
             onChange={(e) => handleChangeRadioHumor(e)}
           >

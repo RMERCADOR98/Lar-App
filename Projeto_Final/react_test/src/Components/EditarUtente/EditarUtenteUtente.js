@@ -58,12 +58,6 @@ const EditarUtenteUtente = ({
 }) => {
   const classes = useStyles();
 
-  // const USERid = utente.alimentacao.id;
-
-  // console.log(USERid);
-
-  // const alimentoId = alimento.id;
-  // const Uid = id;
   console.log(utente.id);
   console.log(Uid);
   const Utenteid = Uid;

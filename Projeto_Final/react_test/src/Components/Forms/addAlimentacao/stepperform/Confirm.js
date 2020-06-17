@@ -16,7 +16,7 @@ class Confirm extends Component {
 
   render() {
     const {
-      values: { pequenoAlmoco, almoco, lanche, jantar },
+      values: { pequenoAlmoco, almoco, lanche, jantar, alimentacao, gostou },
     } = this.props;
 
     console.log(this.props);
@@ -34,6 +34,8 @@ class Confirm extends Component {
           <ListItemText primary="Almoço" secondary={almoco} />
           <ListItemText primary="Lanche" secondary={lanche} />
           <ListItemText primary="Jantar" secondary={jantar} />
+          <ListItemText primary="Alimentação" secondary={alimentacao} />
+          <ListItemText primary="Gostou" secondary={gostou} />
         </List>
         <Button
           variant="contained"

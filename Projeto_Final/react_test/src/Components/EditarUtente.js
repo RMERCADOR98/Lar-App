@@ -13,27 +13,6 @@ import { Button, TextField, Grid } from "@material-ui/core";
 class EditarUtente extends Component {
   state = {
     Id: this.props.id,
-    // nomeCompleto: "",
-    // alcunha: "",
-    // idade: "",
-
-    // sexo: "",
-    // estadoCivil: "",
-    // nacionalidade: "",
-    // altura: "",
-    // peso: "",
-
-    // nCartaoCidadao: "",
-    // nContribuinte: "",
-    // nSegurancaSocial: "",
-
-    // grupoSanguineo: "",
-    // doencas: "",
-    // alergias: "",
-
-    // centroSaude: "",
-    // contactoCentroSaude: "",
-    // medico: "",
   };
   handleChange = (e) => {
     this.setState({
@@ -55,9 +34,6 @@ class EditarUtente extends Component {
   };
 
   render() {
-    // const utente = this.props.match.params.id;
-    // console.log(utente);
-
     const utente = this.props.utente;
     console.log(utente);
 
@@ -68,7 +44,10 @@ class EditarUtente extends Component {
       <div key={utente.id}>
         <form onSubmit={this.handleSubmit}>
           <Grid style={{ flex: 1 }} container fluid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6} md={6}>
+              <Grid xs={12}>
+                <h2>Informações</h2>
+              </Grid>
               <TextField
                 label="Nome"
                 onChange={this.handleChangeMUI("nomeCompleto")}
@@ -80,7 +59,7 @@ class EditarUtente extends Component {
                 onChange={this.handleChangeMUI("alcunha")}
                 defaultValue={utente.alcunha}
               />
-              <p></p>
+              {/* <p></p> */}
               <TextField
                 label="Idade"
                 onChange={this.handleChangeMUI("idade")}
@@ -98,7 +77,7 @@ class EditarUtente extends Component {
                 onChange={this.handleChangeMUI("estadoCivil")}
                 defaultValue={utente.estadoCivil}
               />
-              <p></p>
+              {/* <p></p> */}
 
               <TextField
                 label="Nacionalidade"
@@ -117,7 +96,7 @@ class EditarUtente extends Component {
                 defaultValue={utente.peso}
               />
 
-              <p></p>
+              {/* <p></p> */}
               <TextField
                 label="Cartão Cidadão"
                 onChange={this.handleChangeMUI("nCartaoCidadao")}
@@ -134,7 +113,10 @@ class EditarUtente extends Component {
                 defaultValue={utente.nSegurancaSocial}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={6} md={6}>
+              <Grid xs={12}>
+                <h2>Saúde</h2>
+              </Grid>
               <TextField
                 label="Grupo Sanguíneo"
                 onChange={this.handleChangeMUI("grupoSanguineo")}
@@ -150,7 +132,7 @@ class EditarUtente extends Component {
                 onChange={this.handleChangeMUI("alergias")}
                 defaultValue={utente.alergias}
               />
-              <p></p>
+
               <TextField
                 label="Centro de Saúde"
                 onChange={this.handleChangeMUI("centroSaude")}
@@ -169,13 +151,6 @@ class EditarUtente extends Component {
             </Grid>
           </Grid>
 
-          {/* <label htmlFor="estadoCivil">Estado Civil:</label> */}
-          {/* <input
-            type="text"
-            id="eCivil"
-            onChange={this.handleChange}
-            value={utente.eCivil}
-          />*/}
           <br />
           <button
             style={{ background: "transparent", border: "none", fontSize: "0" }}

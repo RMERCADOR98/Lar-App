@@ -16,12 +16,7 @@ class AddUtente extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    // this.props.addUtente(this.state);
-    // this.setState({
-    //   nome: "",
-    //   idade: "",
-    //   eCivil: "",
-    // });
+
     this.props.createUtente(this.state);
   };
 

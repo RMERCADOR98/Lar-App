@@ -8,6 +8,7 @@ import Info from "./Layout/Info";
 import PerfilUtente from "./Components/PerfilUtente";
 import BemEstar from "./Layout/BemEstar";
 import EditarUtente from "./Components/EditarUtente";
+import Familiar from "./Layout/Familiar";
 import {
   BrowserRouter as Router,
   Route,
@@ -36,8 +37,8 @@ class App extends Component {
           <ButtonAppBar>
             <Switch>
               <Route exact path="/" component={Utentes} />
+              <Route exact path="/Familiar/:id" component={Familiar} />
               <Route exact path="/Utente/:id" component={PerfilUtente} />
-              {/* <Route path="/editarUtente/:id" component={EditarUtente} /> */}
               <Route exact path="/Alimentação/:id" component={Alimentacao} />
               <Route exact path="/Saúde/:id" component={Saude} />
               <Route exact path="/Informações/:id" component={Info} />

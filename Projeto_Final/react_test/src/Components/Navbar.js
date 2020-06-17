@@ -163,7 +163,7 @@ const ButtonAppBar = ({ children, auth }) => {
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             <Link to="/" className={classes.link}>
-              Logo
+              LAPP
             </Link>
           </Typography>
 

@@ -5,9 +5,13 @@ import Sucess from "./Sucess";
 import CMA from "./CMA";
 import NNN from "./NNN";
 
-export class UserForm extends Component {
+import { createFamiliar } from "../../../../Store/Actions/FamiliarActions";
+import { connect } from "react-redux"; //para que o component tenha acesso á redux store
+
+export class FamForm extends Component {
   state = {
     step: 1,
+    Id: this.props.id,
 
     foto: "",
     nomeCompleto: "",
@@ -45,6 +49,12 @@ export class UserForm extends Component {
     this.setState({
       [input]: e.target.value,
     });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.createFamiliar(this.state);
+    this.props.handleClose();
   };
 
   render() {
@@ -110,13 +120,19 @@ export class UserForm extends Component {
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             values={values}
+            handleSubmit={this.handleSubmit}
           />
         );
-      case 5:
-        return <Sucess />;
+
       default:
     }
   }
 }
 
-export default UserForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createFamiliar: (familiar) => dispatch(createFamiliar(familiar)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(FamForm);

@@ -32,24 +32,24 @@ const BemEstarTop = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <ExpansionPanel disabled>
+      <ExpansionPanel
+        disabled
+        style={{ marginRight: "12px", marginLeft: "12px" }}
+      >
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel3a-content"
           id="panel3a-header"
         >
           <Grid container fluid="true" justify="center" align="center">
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               <Typography className={classes.heading}>Data</Typography>
             </Grid>
-            <Grid item xs={3}>
-              <Typography className={classes.heading}>Alimentação</Typography>
+            <Grid item xs={4}>
+              <Typography className={classes.heading}>Banho</Typography>
             </Grid>
-            <Grid item xs={3}>
-              <Typography className={classes.heading}>Gostou?</Typography>
-            </Grid>
-            <Grid item xs={3}>
-              <Typography className={classes.heading}>Gostou?</Typography>
+            <Grid item xs={4}>
+              <Typography className={classes.heading}>Humor</Typography>
             </Grid>
           </Grid>
         </ExpansionPanelSummary>

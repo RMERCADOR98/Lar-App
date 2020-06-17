@@ -18,9 +18,9 @@ const SignedOutLinks = () => {
   return (
     <div className={classes.root}>
       <NavLink to="/sign" className={classes.link} variant="inherit">
-        <Button color="inherit" type="button">
+        {/* <Button color="inherit" type="button">
           Sign Up
-        </Button>
+        </Button> */}
       </NavLink>
       <Button color="inherit">
         <NavLink to="/signin" className={classes.link} variant="inherit">

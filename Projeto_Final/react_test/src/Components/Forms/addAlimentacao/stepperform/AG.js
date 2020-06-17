@@ -8,14 +8,18 @@ import FormLabel from "@material-ui/core/FormLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 
-class MB extends Component {
+class AG extends Component {
   continue = (e) => {
     e.preventDefault();
     this.props.nextStep();
   };
 
   render() {
-    const { values, handleChangeRadio, handleChangeRadioBanho } = this.props;
+    const {
+      values,
+      handleChangeRadioAlimentacao,
+      handleChangeRadioGostou,
+    } = this.props;
 
     const styles = {
       button: {
@@ -27,14 +31,14 @@ class MB extends Component {
       <Fragment>
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            <h4>Medicação</h4>
+            <h4>Alimentação</h4>
           </FormLabel>
           <RadioGroup
             aria-label="position"
             row
-            name="medicacao"
-            value={values.medicacao}
-            onChange={(e) => handleChangeRadio(e)}
+            name="alimentacao"
+            value={values.alimentacao}
+            onChange={(e) => handleChangeRadioAlimentacao(e)}
           >
             <FormControlLabel
               value="Completa"
@@ -53,21 +57,17 @@ class MB extends Component {
 
         <FormControl component="fieldset">
           <FormLabel component="legend">
-            <h4>Banho</h4>
+            <h4>Gostou</h4>
           </FormLabel>
           <RadioGroup
             aria-label="position"
             row
-            name="banho"
-            value={values.banho}
-            onChange={(e) => handleChangeRadioBanho(e)}
+            name="gostou"
+            value={values.gostou}
+            onChange={(e) => handleChangeRadioGostou(e)}
           >
-            <FormControlLabel value="Tomou" control={<Radio />} label="Tomou" />
-            <FormControlLabel
-              value="Não Tomou"
-              control={<Radio />}
-              label="Não Tomou"
-            />
+            <FormControlLabel value="Sim" control={<Radio />} label="Sim" />
+            <FormControlLabel value="Não" control={<Radio />} label="Não" />
           </RadioGroup>
         </FormControl>
 
@@ -87,4 +87,4 @@ class MB extends Component {
   }
 }
 
-export default MB;
+export default AG;

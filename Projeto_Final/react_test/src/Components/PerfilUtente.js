@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 import Container from "@material-ui/core/Container";
 import ImageAvatars from "./Perfil Utente/perfilUtente";
 import Button from "@material-ui/core/Button";
-import { Grid, CardHeader, Avatar, Fab } from "@material-ui/core";
+import { Grid, CardHeader, Avatar, Fab, Paper } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import BotaoFamiliar from "./Perfil Utente/BotaoFamiliar";
 import EditIcon from "@material-ui/icons/Edit";
@@ -40,13 +40,18 @@ const useStyles = makeStyles((theme) => ({
   },
   voltar: {
     margin: "0 auto",
-    width: theme.spacing(9),
-    height: theme.spacing(9),
+    width: theme.spacing(7),
+    height: theme.spacing(7),
   },
   arrow: {
     width: theme.spacing(5),
     height: theme.spacing(5),
   },
+  delete: {
+    width: theme.spacing(4),
+    height: theme.spacing(4),
+  },
+  avatar: {},
 }));
 
 const PerfilUtente = (props) => {
@@ -76,8 +81,6 @@ const PerfilUtente = (props) => {
         }}
       >
         <Container className={classes.root}>
-          {/* <BadgePerfilUtente> */}
-
           <Card>
             <Grid
               container
@@ -90,7 +93,7 @@ const PerfilUtente = (props) => {
               <Grid item xs={12}>
                 <CardHeader
                   avatar={
-                    <Avatar aria-label="recipe" className={classes.voltar}>
+                    <Avatar aria-label="voltar" className={classes.voltar}>
                       <Fab
                         variant="contained"
                         color="secondary"
@@ -104,7 +107,11 @@ const PerfilUtente = (props) => {
                     </Avatar>
                   }
                   action={
-                    <Avatar aria-label="recipe" className={classes.voltar}>
+                    <Avatar
+                      aria-label="Delete"
+                      className={classes.voltar}
+                      style={{ marginTop: "8px", marginRight: "6px" }}
+                    >
                       <Fab
                         variant="contained"
                         color="secondary"
@@ -114,7 +121,7 @@ const PerfilUtente = (props) => {
                           props.history.push("/");
                         }}
                       >
-                        <DeleteIcon className={classes.arrow} />
+                        <DeleteIcon className={classes.delete} />
                       </Fab>
                     </Avatar>
                   }
@@ -128,7 +135,10 @@ const PerfilUtente = (props) => {
               >
                 {/* <ImageAvatars /> */}
                 {/* <img src={utente.url} /> */}
+
                 <Avatar
+                  component={Paper}
+                  elevation={10}
                   src={utente.url}
                   className={classes.large}
                   style={{
@@ -160,8 +170,8 @@ const PerfilUtente = (props) => {
                 </span>
                 <br />
               </Grid>
-              <Grid item xs={6} md={4} xl={4}>
-                <BotaoFamiliar />
+              <Grid item xs={7} md={4} xl={4}>
+                <BotaoFamiliar utenteId={utenteId} />
               </Grid>
             </Grid>
 

@@ -28,6 +28,8 @@ class Confirm extends Component {
       },
     } = this.props;
 
+    console.log(this.props);
+
     const styles = {
       button: {
         margin: 15,
@@ -58,10 +60,10 @@ class Confirm extends Component {
         <Button
           variant="contained"
           color="primary"
-          onClick={this.continue}
+          onClick={this.props.handleSubmit}
           className={styles.button}
         >
-          Continue
+          Confirmar
         </Button>
       </Fragment>
     );

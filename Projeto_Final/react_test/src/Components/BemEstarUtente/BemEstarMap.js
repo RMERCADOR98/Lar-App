@@ -1,16 +1,15 @@
 import React from "react";
-
-import { makeStyles } from "@material-ui/core";
-import AlimentacaoUtente from "./AlimentacaoUtente";
 import { Container } from "@material-ui/core";
 
+import { makeStyles } from "@material-ui/core";
+import BemEstarUtente from "./BemEstarUtente";
+import { Card, Avatar, CardHeader, Fab } from "@material-ui/core";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import { Grid, CardHeader, Avatar, Fab, Card } from "@material-ui/core";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import AlimentacaoTop from "../../Components/AlimentacaoUtente/AlimentaçãoTop";
+import BemEstarTop from "./BemEstarTop";
 
-const useStyles = makeStyles((theme) => ({
+const Styles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -26,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AlimentacaoMap = ({ alimentacao, id, deleteAlimentacao, prop }) => {
-  const classes = useStyles();
+const bemEstarMap = ({ bemEstar, id, deleteBemEstar, prop }) => {
+  const classes = Styles();
 
   return (
     <Container>
@@ -51,18 +50,18 @@ const AlimentacaoMap = ({ alimentacao, id, deleteAlimentacao, prop }) => {
               </Fab>
             </Avatar>
           }
-          title={<h1>Alimentação</h1>}
+          title={<h1>Bem Estar</h1>}
         ></CardHeader>
-        <AlimentacaoTop />
+        <BemEstarTop />
         <div className={classes.root}>
-          {alimentacao &&
-            alimentacao.map((alimento) => {
+          {bemEstar &&
+            bemEstar.map((bemEsta) => {
               return (
-                <div key={alimentacao.id}>
-                  <AlimentacaoUtente
-                    alimento={alimento}
+                <div key={bemEsta.id}>
+                  <BemEstarUtente
+                    bemEsta={bemEsta}
                     id={id}
-                    deleteAlimentacao={deleteAlimentacao}
+                    deleteBemEstar={deleteBemEstar}
                   />
                 </div>
               );
@@ -74,4 +73,4 @@ const AlimentacaoMap = ({ alimentacao, id, deleteAlimentacao, prop }) => {
   );
 };
 
-export default AlimentacaoMap;
+export default bemEstarMap;

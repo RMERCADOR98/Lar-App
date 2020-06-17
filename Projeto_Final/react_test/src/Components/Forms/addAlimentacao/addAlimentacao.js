@@ -53,11 +53,11 @@ const FormDialogaddAlimentacao = ({ id }) => {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title" style={{ textAlign: "center" }}>
-          Adicionar Familiar
+          Adicionar Alimentação
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Complete o formulário para adicionar um Familiar
+            Complete o formulário para adicionar as refeições diárias do utente
           </DialogContentText>
           <AlimentacaoForm handleClose={handleClose} id={id} />
         </DialogContent>

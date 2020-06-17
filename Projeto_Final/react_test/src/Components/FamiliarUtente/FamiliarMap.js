@@ -1,14 +1,13 @@
 import React from "react";
 
-import { makeStyles } from "@material-ui/core";
-import AlimentacaoUtente from "./AlimentacaoUtente";
+import { makeStyles, Card } from "@material-ui/core";
+import FamiliarUtente from "./FamiliarUtente";
 import { Container } from "@material-ui/core";
 
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import { Grid, CardHeader, Avatar, Fab, Card } from "@material-ui/core";
+import { Grid, CardHeader, Avatar, Fab } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import AlimentacaoTop from "../../Components/AlimentacaoUtente/AlimentaçãoTop";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AlimentacaoMap = ({ alimentacao, id, deleteAlimentacao, prop }) => {
+const FamiliarMap = ({ familiar, id, deleteFamiliar, prop }) => {
   const classes = useStyles();
 
   return (
@@ -51,27 +50,26 @@ const AlimentacaoMap = ({ alimentacao, id, deleteAlimentacao, prop }) => {
               </Fab>
             </Avatar>
           }
-          title={<h1>Alimentação</h1>}
+          title={<h1>Familiares</h1>}
         ></CardHeader>
-        <AlimentacaoTop />
+
         <div className={classes.root}>
-          {alimentacao &&
-            alimentacao.map((alimento) => {
+          {familiar &&
+            familiar.map((familia) => {
               return (
-                <div key={alimentacao.id}>
-                  <AlimentacaoUtente
-                    alimento={alimento}
+                <div key={familiar.id}>
+                  <FamiliarUtente
+                    familia={familia}
                     id={id}
-                    deleteAlimentacao={deleteAlimentacao}
+                    deleteFamiliar={deleteFamiliar}
                   />
                 </div>
               );
             })}
         </div>
-        <p></p>
       </Card>
     </Container>
   );
 };
 
-export default AlimentacaoMap;
+export default FamiliarMap;

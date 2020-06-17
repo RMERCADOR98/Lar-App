@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Grid } from "@material-ui/core";
+import { makeStyles, Grid, Paper } from "@material-ui/core";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -47,6 +47,10 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
+  espaco: {
+    marginRight: "12px",
+    marginLeft: "12px",
+  },
 }));
 
 const BemEstarUtente = ({ bemEsta, id, Uid, deleteBemEstar }) => {
@@ -58,59 +62,59 @@ const BemEstarUtente = ({ bemEsta, id, Uid, deleteBemEstar }) => {
 
   return (
     <Grid item xs={12} className={classes.expansionPanel}>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Grid container fluid="true" justify="center" align="center">
-            <Grid item xs={3}>
-              <Typography className={classes.heading}>
-                {new Date(bemEsta.createdAt.seconds * 1000).toLocaleDateString(
-                  "pt-PT"
-                )}
-              </Typography>
+      <Paper className={classes.espaco} elevation={5}>
+        <ExpansionPanel>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Grid container fluid="true" justify="center" align="center">
+              <Grid item xs={4}>
+                <Typography className={classes.heading}>
+                  {new Date(
+                    bemEsta.createdAt.seconds * 1000
+                  ).toLocaleDateString("pt-PT")}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Typography className={classes.heading}>
+                  {bemEsta.banho}
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography className={classes.heading}>
+                  {bemEsta.humor}
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={3}>
-              <Typography className={classes.heading}>
-                {bemEsta.medicacao}
-              </Typography>
-            </Grid>
-            <Grid item xs={3}>
-              <Typography className={classes.heading}>
-                {bemEsta.banho}
-              </Typography>
-            </Grid>
-            <Grid item xs={3}>
-              <Typography className={classes.heading}>
-                {bemEsta.humor}
-              </Typography>
-            </Grid>
-          </Grid>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails style={{ background: "lightGrey" }}>
-          <Typography>
-            <p>
-              <br />
-              <b>Observações:</b> {bemEsta.observacoes}
-              <br />
-              <deleteAlimentacao Uid={Uid} />
-            </p>
-            <Fab
-              color="secondary"
-              aria-label="edit"
-              onClick={() => {
-                deleteBemEstar(bemEsta.id, Uid);
-                console.log(Uid); //id da alimentação diária
-              }}
-              className={classes.fab}
-            >
-              <DeleteIcon />
-            </Fab>
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails style={{ background: "lightGrey" }}>
+            <Typography>
+              <p>
+                <b>Medicação: </b> {bemEsta.medicacao}
+                <br />
+                <br />
+                <b>Observações:</b> {bemEsta.observacoes}
+                <br />
+                <deleteAlimentacao Uid={Uid} />
+              </p>
+              <Fab
+                color="secondary"
+                aria-label="edit"
+                onClick={() => {
+                  deleteBemEstar(bemEsta.id, Uid);
+                  console.log(Uid); //id da alimentação diária
+                }}
+                className={classes.fab}
+              >
+                <DeleteIcon />
+              </Fab>
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      </Paper>
       <br />
     </Grid>
   );
@@ -122,11 +126,7 @@ const mapStateToProps = (state, ownProps) => {
   console.log(Uid);
   console.log(state.firestore.data);
 
-  // const alimentos = state.firestore.data.utentes;
-  // const utente = utentes ? utentes[Uid] : null;
-
   return {
-    // utente: utente,
     Uid: Uid,
     auth: state.firebase.auth,
   };

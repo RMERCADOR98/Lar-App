@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles, Grid } from "@material-ui/core";
+import { makeStyles, Grid, Paper } from "@material-ui/core";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -46,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
+  espaco: {
+    marginRight: "12px",
+    marginLeft: "12px",
+  },
 }));
 
 const AlimentacaoUtente = ({
@@ -58,39 +62,42 @@ const AlimentacaoUtente = ({
 }) => {
   const classes = useStyles();
 
-  // const USERid = utente.alimentacao.id;
-
-  // console.log(USERid);
-
-  // const alimentoId = alimento.id;
-  // const Uid = id;
   console.log(alimento.id);
   console.log(Uid);
   const Utenteid = Uid;
 
   return (
     <Grid item xs={12} className={classes.expansionPanel}>
-      <ExpansionPanel>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Grid container fluid="true" justify="center" align="center">
-            <Grid item xs={4}>
-              <Typography className={classes.heading}>cenas</Typography>
+      <Paper className={classes.espaco} elevation={5}>
+        <ExpansionPanel>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Grid container fluid="true" justify="center" align="center">
+              <Grid item xs={4}>
+                <Typography className={classes.heading}>
+                  {" "}
+                  {new Date(
+                    alimento.createdAt.seconds * 1000
+                  ).toLocaleDateString("pt-PT")}
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography className={classes.heading}>
+                  {alimento.alimentacao}
+                </Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <Typography className={classes.heading}>
+                  {alimento.gostou}
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={4}>
-              <Typography className={classes.heading}>cenas</Typography>
-            </Grid>
-            <Grid item xs={4}>
-              <Typography className={classes.heading}>cenas</Typography>
-            </Grid>
-          </Grid>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails style={{ background: "lightGrey" }}>
-          <Typography>
-            <p>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails style={{ background: "lightGrey" }}>
+            <Typography>
               <br />
               <b>Pequeno Almoço:</b> {alimento.pequenoAlmoco}
               <br />
@@ -104,21 +111,21 @@ const AlimentacaoUtente = ({
               <b>Jantar:</b> {alimento.jantar}
               <br />
               <deleteAlimentacao Uid={Uid} />
-            </p>
-            <Fab
-              color="secondary"
-              aria-label="delete"
-              onClick={() => {
-                deleteAlimentacao(alimento.id, Uid);
-                console.log(Uid); //id da alimentação diária
-              }}
-              className={classes.fab}
-            >
-              <DeleteIcon />
-            </Fab>
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+              <Fab
+                color="secondary"
+                aria-label="delete"
+                onClick={() => {
+                  deleteAlimentacao(alimento.id, Uid);
+                  console.log(Uid); //id da alimentação diária
+                }}
+                className={classes.fab}
+              >
+                <DeleteIcon />
+              </Fab>
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
+      </Paper>
       <br />
     </Grid>
   );

@@ -8,19 +8,6 @@ import InfoMap from "../Components/Info/InfoMap";
 import EditarUtente from "../Components/EditarUtente";
 
 class Info extends Component {
-  // state = {
-  //   info: {
-  //     nome: "João Matos",
-  //     alcunha: "Ti João",
-  //     idade: "86",
-  //     altura: "1,76m",
-  //     estadoCivil: "Viúvo",
-  //     dataNascimento: "15/04/1934",
-  //     nacionalidade: "Portugesa",
-  //     id: 1,
-  //   },
-  // };
-
   render() {
     const {
       auth,
@@ -36,7 +23,6 @@ class Info extends Component {
     if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div>
-        <h1> Informações</h1>
         {/* <InfoUtente infos={this.state.info} /> */}
         <InfoMap utentes={utentes} prop={prop} bind={bind} />
         {/* <EditarUtente prop={prop} /> */}

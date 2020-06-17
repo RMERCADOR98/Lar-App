@@ -13,12 +13,14 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 
+import LAPP from "./LAPP.jpg";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://projetofinal.now.sh/">
+        LAPP
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -35,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -55,11 +56,15 @@ export default function SignInForm({ handleChange, handleSubmit, error }) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+        <Avatar
+          className={classes.avatar}
+          style={{ width: "100px", height: "100px" }}
+        >
+          <img src={LAPP} style={{ width: "100px", height: "100px" }} />
         </Avatar>
+        <h2>LAPP</h2>
         <Typography component="h1" variant="h5">
-          Sign in
+          Introduza as suas credênciais
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField

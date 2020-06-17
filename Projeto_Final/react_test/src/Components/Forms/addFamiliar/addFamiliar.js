@@ -8,9 +8,10 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Add from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import FamForm from "./stepperform/FamForm";
+import { makeStyles } from "@material-ui/core";
 
-export default function FormDialog() {
-  const styles = (theme) => ({
+export default function FormDialogFam({ id }) {
+  const useStyles = makeStyles((theme) => ({
     button: {
       margin: theme.spacing.unit,
     },
@@ -20,7 +21,7 @@ export default function FormDialog() {
       right: theme.spacing(2),
       margin: theme.spacing(1),
     },
-  });
+  }));
 
   const [open, setOpen] = React.useState(false);
 
@@ -32,13 +33,15 @@ export default function FormDialog() {
     setOpen(false);
   };
 
+  const classes = useStyles();
+
   return (
     <div>
       <Fab
         color="secondary"
         mini
         aria-label="add"
-        className={styles.fab}
+        className={classes.fab}
         onClick={handleClickOpen}
       >
         <Add />
@@ -56,16 +59,9 @@ export default function FormDialog() {
           <DialogContentText>
             Complete o formulário para adicionar um Familiar
           </DialogContentText>
-          <FamForm />
+          <FamForm handleClose={handleClose} id={id} />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
-          </Button>
-        </DialogActions>
+        <DialogActions></DialogActions>
       </Dialog>
     </div>
   );

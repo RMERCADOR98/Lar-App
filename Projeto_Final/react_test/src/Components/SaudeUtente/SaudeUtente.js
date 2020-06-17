@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles, Paper } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +23,7 @@ const SaudeUtente = ({ saude }) => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.gridPaper} justify="center">
+    <Container className={classes.root}>
       <p>
         <b>Grupo Sanguineo:</b> {saude.grupoSanguineo}
         <br />
@@ -42,7 +43,7 @@ const SaudeUtente = ({ saude }) => {
         <b>Médico:</b> {saude.medico}
         <br />
       </p>
-    </Paper>
+    </Container>
   );
 };
 

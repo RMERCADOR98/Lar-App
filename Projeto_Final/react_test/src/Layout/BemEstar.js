@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import BemEstarUtente from "../Components/BemEstar Utente/BemEstarUtente";
+import BemEstarUtente from "../Components/BemEstarUtente/BemEstarUtente";
 import AddBemEstar from "../Components/AddBemEstar";
 
 import FormDialogaddBemEstar from "../Components/Forms/addBemEstar/addBemEstar";
@@ -9,64 +9,27 @@ import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 
-import BemEstarMapMap from "../Components/BemEstar Utente/BemEstarMap";
-import BemEstarTop from "../Components/BemEstar Utente/BemEstarTop";
+import BemEstarMap from "../Components/BemEstarUtente/BemEstarMap";
+import BemEstarTop from "../Components/BemEstarUtente/BemEstarTop";
 
 class BemEstar extends Component {
-  // state = {
-  //   bes: [
-  //     {
-  //       medicacao: "Tomou",
-  //       banho: "Tomou",
-  //       humor: "Contente",
-  //       observacoes: "Esteve muito bem humurado",
-  //       id: 1,
-  //     },
-
-  //     {
-  //       medicacao: "Parcial",
-  //       banho: "Não Tomou",
-  //       humor: "Normal",
-  //       observacoes: "Nada a acrescentar",
-  //       id: 2,
-  //     },
-  //   ],
-  // };
-
-  // addBE = (be) => {
-  //   be.id = Math.random();
-  //   let bes = [...this.state.bes, be];
-  //   this.setState({
-  //     bes: bes,
-  //   });
-  // };
-
-  // deleteBE = (id) => {
-  //   let bes = this.state.bes.filter((be) => {
-  //     return be.id !== id;
-  //   });
-  //   this.setState({
-  //     bes: bes,
-  //   });
-  // };
-
   deleteBemEstar(BEid, Uid) {
     this.props.deleteBemEstar(BEid, Uid);
   }
 
   render() {
-    const { auth, bemEstar, id } = this.props;
+    const { auth, bemEstar, id, prop } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
+    console.log(bemEstar);
     return (
       <div>
-        <h1> Bem Estar</h1>
-
         {/* <BemEstarUtente bes={this.state.bes} deleteBE={this.deleteBE} /> */}
-        <BemEstarTop />
-        <BemEstarMapMap
+
+        <BemEstarMap
           bemEstar={bemEstar}
           id={id}
           deleteBemEstar={this.deleteBemEstar}
+          prop={prop}
         />
 
         {/* <AddBemEstar addBE={this.addBE} /> */}
@@ -77,11 +40,14 @@ class BemEstar extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+  const prop = ownProps;
   const id = ownProps.match.params.id;
+
   console.log(state);
   console.log(id);
   return {
     id: id,
+    prop: prop,
     utentes: state.firestore.ordered.utentes,
     bemEstar: state.firestore.ordered.bemEstar,
     auth: state.firebase.auth,
