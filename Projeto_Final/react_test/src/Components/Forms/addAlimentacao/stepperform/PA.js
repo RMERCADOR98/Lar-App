@@ -41,7 +41,7 @@ class PA extends Component {
           onClick={this.continue}
           className={styles.button}
         >
-          Continue
+          Continuar
         </Button>
       </Fragment>
     );

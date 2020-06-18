@@ -56,7 +56,7 @@ const FormDialogaddBemEstar = ({ id }) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Complete o formulário para adicionar um Familiar
+            Complete o formulário para adicionar o Bem Estar do Utente
           </DialogContentText>
           <BemEstarForm handleClose={handleClose} id={id} />
         </DialogContent>

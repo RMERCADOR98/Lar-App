@@ -70,7 +70,7 @@ class FotoUtenteUpload extends Component {
           <img src={this.state.url} height="100" width="100" />
         </div>
         <div className="botoes">
-          <button onClick={this.handleUpload}>Upload Image</button>
+          <button onClick={this.handleUpload}>Carregar imagem</button>
           {/* <span onclick={this.sendData}>{link}</span> */}
           <button onClick={this.sendData}>Registar</button>
         </div>

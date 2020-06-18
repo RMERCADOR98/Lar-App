@@ -70,7 +70,7 @@ class NSE extends Component {
           onClick={this.continue}
           className={styles.button}
         >
-          Avançar
+          Continuar
         </Button>
       </Fragment>
     );
